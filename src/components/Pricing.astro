@@ -1,0 +1,559 @@
+---
+interface Props {
+  promoPrice?: string;
+  fullPrice?: string;
+  maxSpots?: number;
+  whatsappNumber?: string;
+}
+
+const {
+  promoPrice = "580",
+  fullPrice = "960",
+  maxSpots = 30,
+  whatsappNumber = "3773364103",
+} = Astro.props;
+
+const savings = Number(fullPrice) - Number(promoPrice);
+const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
+  "Ciao! Vorrei bloccare l'offerta annuale da €580 di Ethos Training Club."
+)}`;
+
+const schedule = [
+  { days: "Lunedì – Venerdì", hours: "07:00 – 21:00", note: "Orario continuato" },
+  { days: "Sabato", hours: "08:00 – 17:00", note: "" },
+  { days: "Domenica", hours: "09:00 – 13:00", note: "" },
+];
+
+const inclusions = [
+  {
+    num: "01",
+    title: "Colloquio & Anamnesi",
+    desc: "Valutazione clinico-sportiva e definizione degli obiettivi.",
+  },
+  {
+    num: "02",
+    title: "Valutazione Funzionale (20 min)",
+    desc: "Test motorio iniziale di mobilità e forza.",
+  },
+  {
+    num: "03",
+    title: "Scheda Individuale (6 Settimane)",
+    desc: "Programmazione sartoriale aggiornata progressivamente.",
+  },
+  {
+    num: "04",
+    title: "2 Mini Class / Settimana",
+    desc: "Sessioni in piccolo gruppo con monitoraggio TriFit dedicato.",
+  },
+];
+---
+
+<section id="offerta" class="pricing-section">
+  <div class="container">
+    
+    <!-- Meta Bar Superiore -->
+    <div class="section-meta">
+      <span class="section-number">04 / QUOTE</span>
+      <span class="section-tag">Ammissione Founding Member</span>
+    </div>
+
+    <!-- Header Editoriale -->
+    <div class="header-grid">
+      <h2 class="section-title">
+        Tariffa di Lancio.<br />
+        <span class="text-accent">Accesso Riservato.</span>
+      </h2>
+      <p class="section-lead">
+        Condizioni riservate esclusivamente ai primi <strong>{maxSpots} iscritti</strong>. 
+        Una quota annuale bloccata per chi sceglie di costruire il percorso fin dal primo giorno.
+      </p>
+    </div>
+
+    <!-- Griglia Principale -->
+    <div class="pricing-grid">
+      
+      <!-- Box Quota Principale -->
+      <div class="tier-card">
+        <div class="tier-header">
+          <div class="tier-badge-row">
+            <span class="tier-code">FND-30</span>
+            <span class="tier-saving">Risparmio di €{savings}</span>
+          </div>
+          <h3 class="tier-name">Abbonamento Annuale</h3>
+          <p class="tier-sub">Programma completo Mini Class TriFit per 12 mesi</p>
+        </div>
+
+        <div class="tier-price-row">
+          <div class="price-val">
+            <span class="curr">€</span>
+            <span class="amount">{promoPrice}</span>
+            <span class="freq">/anno</span>
+          </div>
+          <div class="price-retail">
+            <span class="retail-label">Listino Ufficiale</span>
+            <span class="retail-amount">€{fullPrice}</span>
+          </div>
+        </div>
+
+        <div class="inclusions-list">
+          <span class="list-heading">Protocollo Incluso:</span>
+          {inclusions.map((item) => (
+            <div class="inc-row">
+              <span class="inc-num">{item.num}</span>
+              <div class="inc-text">
+                <strong>{item.title}</strong>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="tier-actions">
+          <a href="#preiscrizione" class="btn btn-solid">
+            Blocca la Quota Founding Member
+          </a>
+          <span class="limit-caption">Nessun pagamento richiesto online &bull; Riservato a {maxSpots} posti</span>
+        </div>
+      </div>
+
+      <!-- Colonna Laterale: Orari & Info Dirette -->
+      <div class="side-column">
+        
+        <!-- Box Orari Architetturale -->
+        <div class="side-card">
+          <div class="card-meta">
+            <span class="card-meta-num">INF-01</span>
+            <span class="card-meta-tag">Disponibilità Struttura</span>
+          </div>
+          <h3 class="side-title">Orari di Apertura</h3>
+          
+          <div class="schedule-table">
+            {schedule.map((slot) => (
+              <div class="sched-row">
+                <div class="sched-days">
+                  <span>{slot.days}</span>
+                  {slot.note && <small class="sched-note">{slot.note}</small>}
+                </div>
+                <strong class="sched-hours">{slot.hours}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Box Contatto Reception -->
+        <div class="side-card side-card-support">
+          <div class="card-meta">
+            <span class="card-meta-num">INF-02</span>
+            <span class="card-meta-tag">Canale Diretto</span>
+          </div>
+          <h3 class="side-title">Assistenza Reception</h3>
+          <p class="side-desc">
+            Hai domande su orari specifici, livelli di allenamento o vuoi confermare la disponibilità via chat?
+          </p>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Scrivi al 377 3364103
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .pricing-section {
+    position: relative;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Section Meta */
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #737373;
+  }
+
+  .section-number {
+    color: #069892;
+    font-weight: 700;
+  }
+
+  /* Header */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: end;
+    margin-bottom: 4.5rem;
+  }
+
+  .section-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.8rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .text-accent {
+    color: #069892;
+  }
+
+  .section-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #a3a3a3;
+    margin: 0;
+    border-left: 2px solid #004f5b;
+    padding-left: 1.25rem;
+  }
+
+  .section-lead strong {
+    color: #ffffff;
+  }
+
+  /* Layout Griglia */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Card Quota Principale */
+  .tier-card {
+    background-color: #050505;
+    border: 1px solid #1f1f1f;
+    border-radius: 0.35rem;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tier-header {
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .tier-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .tier-code {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.6875rem;
+    color: #069892;
+    letter-spacing: 0.1em;
+  }
+
+  .tier-saving {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #004f5b;
+  }
+
+  .tier-name {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem 0;
+    color: #ffffff;
+  }
+
+  .tier-sub {
+    font-size: 0.875rem;
+    color: #737373;
+    margin: 0;
+  }
+
+  /* Price Area */
+  .tier-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 2rem;
+  }
+
+  .price-val {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+  }
+
+  .curr {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #069892;
+  }
+
+  .amount {
+    font-family: 'Michroma', sans-serif;
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .freq {
+    font-size: 0.875rem;
+    color: #737373;
+    margin-left: 0.2rem;
+  }
+
+  .price-retail {
+    text-align: right;
+  }
+
+  .retail-label {
+    display: block;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555555;
+    margin-bottom: 0.15rem;
+  }
+
+  .retail-amount {
+    font-size: 0.9375rem;
+    color: #737373;
+    text-decoration: line-through;
+  }
+
+  /* Lista Inclusi */
+  .inclusions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .list-heading {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555555;
+  }
+
+  .inc-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .inc-num {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8125rem;
+    color: #069892;
+    padding-top: 0.1rem;
+  }
+
+  .inc-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin-bottom: 0.15rem;
+  }
+
+  .inc-text p {
+    font-size: 0.8125rem;
+    color: #888888;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .tier-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .limit-caption {
+    font-size: 0.6875rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #555555;
+  }
+
+  /* Colonna Laterale */
+  .side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .side-card {
+    background-color: #080808;
+    border: 1px solid #141414;
+    border-radius: 0.35rem;
+    padding: 1.75rem;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .card-meta-num {
+    font-family: 'Michroma', sans-serif;
+    color: #004f5b;
+  }
+
+  .card-meta-tag {
+    color: #555555;
+  }
+
+  .side-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem 0;
+    color: #ffffff;
+  }
+
+  .schedule-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .sched-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.8125rem;
+    border-bottom: 1px solid #141414;
+    padding-bottom: 0.65rem;
+  }
+
+  .sched-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .sched-days {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    color: #a3a3a3;
+  }
+
+  .sched-note {
+    font-size: 0.6875rem;
+    color: #069892;
+    text-transform: uppercase;
+  }
+
+  .sched-hours {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .side-desc {
+    font-size: 0.8125rem;
+    color: #888888;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  /* Bottoni */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-solid {
+    background-color: #069892;
+    color: #000000;
+    border: 1px solid #069892;
+  }
+
+  .btn-solid:hover {
+    background-color: #05807a;
+    border-color: #05807a;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #222222;
+  }
+
+  .btn-outline:hover {
+    border-color: #069892;
+    color: #069892;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .header-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tier-card {
+      padding: 1.75rem 1.25rem;
+    }
+
+    .amount {
+      font-size: 2.5rem;
+    }
+  }
+</style>

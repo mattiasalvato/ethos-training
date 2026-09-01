@@ -1,11 +1,26 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ScarcityBanner from '../components/ScarcityBanner.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import TriFit from '../components/TriFit.astro';
+import Gallery from '../components/Gallery.astro';
+import Pricing from '../components/Pricing.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Faq from '../components/Faq.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Ethos Training Club | Pre-Iscrizioni Founding Member">
+  <ScarcityBanner totalSpots={30} claimedSpots={22} promoPrice="580" fullPrice="960" />
+  <Navbar maxSpots={30} />
+  <main>
+    <Hero maxSpots={30} promoPrice="580" fullPrice="960" />
+    <TriFit />
+    <Gallery />
+    <Pricing maxSpots={30} promoPrice="580" fullPrice="960" />
+    <LeadForm maxSpots={30} promoPrice="580" />
+    <Faq />
+  </main>
+  <Footer />
 </Layout>

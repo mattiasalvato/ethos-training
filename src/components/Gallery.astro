@@ -1,0 +1,334 @@
+---
+interface GalleryItem {
+  id: string;
+  tag: string;
+  title: string;
+  desc: string;
+  imageSrc?: string;
+  aspectRatio?: string;
+}
+
+const items: GalleryItem[] = [
+  {
+    id: "LOC-01",
+    tag: "Layout & Spazio",
+    title: "Area Funzionale TriFit",
+    desc: "Progettazione degli spazi con postazioni dedicate per azzerare le attese e mantenere il focus sul movimento.",
+    aspectRatio: "4 / 3",
+  },
+  {
+    id: "EQP-02",
+    tag: "Dotazione",
+    title: "Setup Tecnico Selezionato",
+    desc: "Attrezzature essenziali e modulari per corpo libero, sovraccarichi controllati e condizionamento metabolico.",
+    aspectRatio: "4 / 3",
+  },
+  {
+    id: "WIP-03",
+    tag: "Stato Lavori",
+    title: "Cantiere in Definizione",
+    desc: "Finiture acustiche, pavimentazione tecnica gommata e illuminazione a binario studiate per la concentrazione.",
+    aspectRatio: "4 / 3",
+  },
+];
+---
+
+<section id="club" class="gallery-section">
+  <div class="container">
+    
+    <!-- Meta Bar Superiore -->
+    <div class="section-meta">
+      <span class="section-number">03 / SPAZI</span>
+      <span class="section-tag">Architettura del Club</span>
+    </div>
+
+    <!-- Header Editoriale Asimmetrico -->
+    <div class="header-grid">
+      <h2 class="section-title">
+        La Struttura.<br />
+        <span class="text-accent">Dietro le quinte.</span>
+      </h2>
+      <p class="section-lead">
+        Uno spazio concepito per rimuovere il disordine visivo e l'affollamento tipico dei grandi centri fitness. 
+        Un ambiente intimo, minimale ed efficiente.
+      </p>
+    </div>
+
+    <!-- Griglia Fotografica Architetturale -->
+    <div class="gallery-grid">
+      {items.map((item) => (
+        <article class="gallery-card">
+          
+          <div class="image-frame">
+            {item.imageSrc ? (
+              <img src={item.imageSrc} alt={item.title} class="card-img" />
+            ) : (
+              <div class="placeholder-frame">
+                <div class="blueprint-crosshair top-left"></div>
+                <div class="blueprint-crosshair top-right"></div>
+                <div class="blueprint-crosshair bottom-left"></div>
+                <div class="blueprint-crosshair bottom-right"></div>
+                
+                <div class="placeholder-content">
+                  <span class="blueprint-code">{item.id}</span>
+                  <span class="blueprint-label">Foto / Render in Arrivo</span>
+                </div>
+              </div>
+            )}
+            
+            <div class="frame-tag">{item.tag}</div>
+          </div>
+
+          <div class="card-caption">
+            <div class="caption-header">
+              <span class="item-id">{item.id}</span>
+              <h3 class="card-title">{item.title}</h3>
+            </div>
+            <p class="card-desc">{item.desc}</p>
+          </div>
+
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .gallery-section {
+    position: relative;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Section Meta Header */
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #737373;
+  }
+
+  .section-number {
+    color: #069892;
+    font-weight: 700;
+  }
+
+  /* Header Asimmetrico */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: end;
+    margin-bottom: 4.5rem;
+  }
+
+  .section-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.8rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .text-accent {
+    color: #069892;
+  }
+
+  .section-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #a3a3a3;
+    margin: 0;
+    border-left: 2px solid #004f5b;
+    padding-left: 1.25rem;
+  }
+
+  /* Griglia Schede */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  .gallery-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #050505;
+    border: 1px solid #141414;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .gallery-card:hover {
+    border-color: #004f5b;
+  }
+
+  /* Frame Fotografico / Blueprint Placeholder */
+  .image-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #0a0a0a;
+    border-bottom: 1px solid #141414;
+    overflow: hidden;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%) contrast(105%);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .gallery-card:hover .card-img {
+    transform: scale(1.03);
+    filter: grayscale(0%) contrast(105%);
+  }
+
+  /* Placeholder Architettonico Tecnico */
+  .placeholder-frame {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+      linear-gradient(to right, #111111 1px, transparent 1px) 0 0 / 24px 24px,
+      linear-gradient(to bottom, #111111 1px, transparent 1px) 0 0 / 24px 24px;
+    background-color: #080808;
+  }
+
+  .blueprint-crosshair {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: #004f5b;
+    border-style: solid;
+  }
+
+  .top-left { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+  .top-right { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+  .bottom-left { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+  .bottom-right { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+
+  .placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .blueprint-code {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8125rem;
+    color: #069892;
+    letter-spacing: 0.1em;
+  }
+
+  .blueprint-label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555555;
+  }
+
+  .frame-tag {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid #1f1f1f;
+    color: #e5e5e5;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.2rem;
+  }
+
+  /* Caption Editoriale */
+  .card-caption {
+    padding: 1.5rem 1.25rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .caption-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .item-id {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.6875rem;
+    color: #004f5b;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .card-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.9375rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .card-desc {
+    font-size: 0.8125rem;
+    color: #888888;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .header-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gallery-section {
+      padding: 4rem 1.25rem;
+    }
+
+    .card-caption {
+      padding: 1.25rem 1rem 1.5rem;
+    }
+  }
+</style>

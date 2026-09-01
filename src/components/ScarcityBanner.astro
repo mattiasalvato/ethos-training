@@ -1,0 +1,139 @@
+---
+interface Props {
+  totalSpots?: number;
+  claimedSpots?: number;
+  promoPrice?: string;
+  fullPrice?: string;
+}
+
+const {
+  totalSpots = 30,
+  claimedSpots = 22,
+  promoPrice = "580",
+  fullPrice = "960",
+} = Astro.props;
+
+const remainingSpots = totalSpots - claimedSpots;
+---
+
+<aside class="scarcity-topbar">
+  <div class="scarcity-container">
+    <div class="scarcity-left">
+      <span class="pulse-beacon"></span>
+      <span class="scarcity-text">
+        FASE PRE-LANCIO: <strong class="text-white">{claimedSpots}/{totalSpots} POSTI ASSEGNATI</strong> &bull; 
+        SOLO <span class="highlight">{remainingSpots} QUOTE FOUNDING</span> RIMASTE A €{promoPrice}
+      </span>
+    </div>
+
+    <div class="scarcity-right">
+      <span class="warning-text">Dopo i 30 posti la quota passa a €{fullPrice}/anno</span>
+      <a href="#preiscrizione" class="scarcity-cta">Blocca Quota</a>
+    </div>
+  </div>
+</aside>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .scarcity-topbar {
+    background-color: #061214;
+    border-bottom: 1px solid rgba(6, 152, 146, 0.3);
+    padding: 0.5rem 1.25rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    position: relative;
+    z-index: 60;
+  }
+
+  .scarcity-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .scarcity-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .pulse-beacon {
+    width: 7px;
+    height: 7px;
+    background-color: #069892;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #069892;
+    flex-shrink: 0;
+  }
+
+  .scarcity-text {
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .text-white {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .highlight {
+    color: #069892;
+    font-weight: 800;
+  }
+
+  .scarcity-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .warning-text {
+    color: #737373;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .scarcity-cta {
+    color: #069892;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-bottom: 1px solid #069892;
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .scarcity-cta:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  @media (max-width: 860px) {
+    .warning-text {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .scarcity-topbar {
+      padding: 0.45rem 0.85rem;
+    }
+
+    .scarcity-text {
+      font-size: 0.68rem;
+    }
+
+    .scarcity-cta {
+      font-size: 0.68rem;
+    }
+  }
+</style>

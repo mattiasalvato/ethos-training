@@ -1,0 +1,281 @@
+---
+interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
+  {
+    id: "01",
+    question: "Cosa comprende la quota lancio di €580/anno?",
+    answer:
+      "La quota include l'accesso per 12 mesi a 2 Mini Class settimanali col metodo TriFit, il colloquio iniziale con anamnesi, la valutazione funzionale di 20 minuti e la prima scheda personalizzata da 6 settimane.",
+  },
+  {
+    id: "02",
+    question: "Come funzionano le Mini Class con metodo TriFit?",
+    answer:
+      "A differenza dei corsi di gruppo generici, ogni partecipante svolge esercizi tarati sulla propria anamnesi e sul proprio livello, con l'assistenza e la correzione costante del trainer dedicato.",
+  },
+  {
+    id: "03",
+    question: "La pre-iscrizione comporta un pagamento immediato?",
+    answer:
+      "No. La compilazione del modulo serve a bloccare la priorità e la tariffa agevolata da Founding Member (€580 invece di €960). Il pagamento verrà finalizzato alla conferma dell'iscrizione.",
+  },
+  {
+    id: "04",
+    question: "Cosa succede se termino le 6 settimane di scheda?",
+    answer:
+      "Viene eseguito un nuovo check di avanzamento e aggiornata la progressione degli allenamenti per continuare a stimolare i progressi in modo sicuro ed efficace.",
+  },
+  {
+    id: "05",
+    question: "Quali sono gli orari di apertura del club?",
+    answer:
+      "Siamo aperti dal lunedì al venerdì dalle 07:00 alle 21:00 con orario continuato, il sabato dalle 08:00 alle 17:00 e la domenica dalle 09:00 alle 13:00.",
+  },
+];
+---
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    
+    <!-- Meta Bar Superiore -->
+    <div class="section-meta">
+      <span class="section-number">05 / FAQ</span>
+      <span class="section-tag">Trasparenza & Dettagli</span>
+    </div>
+
+    <!-- Header Editoriale Asimmetrico -->
+    <div class="header-grid">
+      <h2 class="section-title">
+        Domande Frequenti.<br />
+        <span class="text-accent">Chiarezza Totale.</span>
+      </h2>
+      <p class="section-lead">
+        Informazioni precise su come accedere alla promozione Founding Member, 
+        il funzionamento del metodo TriFit e le modalità di gestione delle sessioni.
+      </p>
+    </div>
+
+    <!-- Lista FAQ a Linee Pure -->
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details class="faq-row">
+          <summary class="faq-summary">
+            <div class="question-wrap">
+              <span class="faq-index">{faq.id}</span>
+              <span class="faq-question-text">{faq.question}</span>
+            </div>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            <div class="faq-content">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .faq-section {
+    position: relative;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Section Meta */
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #737373;
+  }
+
+  .section-number {
+    color: #069892;
+    font-weight: 700;
+  }
+
+  /* Header */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: end;
+    margin-bottom: 4.5rem;
+  }
+
+  .section-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.8rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .text-accent {
+    color: #069892;
+  }
+
+  .section-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #a3a3a3;
+    margin: 0;
+    border-left: 2px solid #004f5b;
+    padding-left: 1.25rem;
+  }
+
+  /* Lista FAQ Lineare */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .faq-row {
+    border-bottom: 1px solid #1a1a1a;
+    transition: background-color 0.2s ease;
+  }
+
+  .faq-row:hover {
+    background-color: #050505;
+  }
+
+  .faq-row[open] {
+    background-color: #050505;
+  }
+
+  .faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .question-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .faq-index {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8125rem;
+    color: #069892;
+    flex-shrink: 0;
+  }
+
+  .faq-question-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+  }
+
+  .faq-toggle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #737373;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .faq-row[open] .faq-toggle {
+    transform: rotate(45deg);
+    color: #069892;
+  }
+
+  .faq-body {
+    padding-bottom: 1.75rem;
+  }
+
+  .faq-content {
+    padding-left: 2.75rem;
+    max-width: 820px;
+  }
+
+  .faq-content p {
+    font-size: 0.875rem;
+    color: #888888;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .header-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .question-wrap {
+      gap: 1rem;
+    }
+
+    .faq-content {
+      padding-left: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .faq-section {
+      padding: 4rem 1.25rem;
+    }
+
+    .faq-summary {
+      padding: 1.25rem 0;
+    }
+
+    .faq-question-text {
+      font-size: 0.9375rem;
+    }
+
+    .faq-content {
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    .question-wrap {
+      gap: 0.75rem;
+    }
+  }
+</style>

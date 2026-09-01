@@ -1,0 +1,411 @@
+---
+interface Props {
+  notificationEmail?: string;
+  whatsappNumber?: string;
+  promoPrice?: string;
+  maxSpots?: number;
+}
+
+const {
+  notificationEmail = "info@ethostrainingclub.it",
+  whatsappNumber = "3773364103",
+  promoPrice = "580",
+  maxSpots = 30,
+} = Astro.props;
+
+const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
+  "Ciao! Vorrei bloccare il mio posto per la promo Founding Member (€580/anno)."
+)}`;
+---
+
+<section id="preiscrizione" class="lead-section">
+  <div class="container">
+    
+    <!-- Meta Bar Superiore -->
+    <div class="section-meta">
+      <span class="section-number">06 / REGISTRAZIONE</span>
+      <span class="section-tag">Pre-Iscrizione Founding Member</span>
+    </div>
+
+    <!-- Layout a Due Colonne Asimmetrico -->
+    <div class="form-grid">
+      
+      <!-- Colonna Sinistra: Manifesto & Istruzioni -->
+      <div class="form-aside">
+        <h2 class="form-title">
+          Blocca la Tariffa.<br />
+          <span class="text-accent">Accesso €{promoPrice}.</span>
+        </h2>
+
+        <p class="form-lead">
+          Compila la richiesta per assicurarti una delle quote annuali agevolate riservate ai primi <strong>{maxSpots} clienti</strong>.
+        </p>
+
+        <div class="procedure-list">
+          <div class="proc-item">
+            <span class="proc-num">01</span>
+            <div class="proc-info">
+              <strong>Invio Modulo</strong>
+              <span>Registra i tuoi dati anagrafici e l'obiettivo.</span>
+            </div>
+          </div>
+          <div class="proc-item">
+            <span class="proc-num">02</span>
+            <div class="proc-info">
+              <strong>Contatto Reception</strong>
+              <span>Fissiamo colloquio e test funzionale da 20 min.</span>
+            </div>
+          </div>
+          <div class="proc-item">
+            <span class="proc-num">03</span>
+            <div class="proc-info">
+              <strong>Zero Pagamento Immediato</strong>
+              <span>La tariffa viene bloccata senza transazioni online.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="direct-support-box">
+          <span class="support-tag">Canale Diretto</span>
+          <p class="support-text">Preferisci procedere direttamente senza inviare il modulo?</p>
+          <a href={whatsappDirectUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Scrivi alla Reception su WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Colonna Destra: Modulo Editoriale -->
+      <div class="form-main">
+        <form 
+          action={`https://formsubmit.co/${notificationEmail}`} 
+          method="POST" 
+          class="editorial-form"
+        >
+          <!-- Parametri Antispam & Notifica -->
+          <input type="hidden" name="_subject" value="Nuova Pre-iscrizione Founding Member - Ethos Training Club" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="input-row">
+            <div class="input-field">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" name="Nome" required placeholder="Nome" />
+            </div>
+            <div class="input-field">
+              <label for="cognome">Cognome *</label>
+              <input type="text" id="cognome" name="Cognome" required placeholder="Cognome" />
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-field">
+              <label for="telefono">Cellulare / WhatsApp *</label>
+              <input type="tel" id="telefono" name="Telefono" required placeholder="333 0000000" />
+            </div>
+            <div class="input-field">
+              <label for="email">Indirizzo Email *</label>
+              <input type="email" id="email" name="Email" required placeholder="nome@email.it" />
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label for="obiettivo">Obiettivo Principale</label>
+            <select id="obiettivo" name="Obiettivo">
+              <option value="Ricominciare ad allenarmi con costanza">Ricominciare ad allenarmi con costanza</option>
+              <option value="Tonificazione e ricomposizione corporea">Tonificazione e ricomposizione corporea</option>
+              <option value="Miglioramento postura e mobilità funzionale">Miglioramento postura e mobilità funzionale</option>
+              <option value="Potenziamento e performance atletica">Potenziamento e performance atletica</option>
+            </select>
+          </div>
+
+          <div class="form-submit-group">
+            <button type="submit" class="btn btn-solid">
+              Invia Richiesta e Blocca Quota
+            </button>
+            <span class="privacy-notice">
+              I dati forniti saranno utilizzati esclusivamente per definire la pre-iscrizione nel rispetto del GDPR.
+            </span>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .lead-section {
+    position: relative;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Section Meta Header */
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #737373;
+  }
+
+  .section-number {
+    color: #069892;
+    font-weight: 700;
+  }
+
+  /* Griglia Form Asimmetrica */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* Colonna Sinistra */
+  .form-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .text-accent {
+    color: #069892;
+  }
+
+  .form-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #a3a3a3;
+    margin: 0 0 2.5rem 0;
+    border-left: 2px solid #004f5b;
+    padding-left: 1.25rem;
+  }
+
+  .form-lead strong {
+    color: #ffffff;
+  }
+
+  .procedure-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 2rem;
+  }
+
+  .proc-item {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .proc-num {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8125rem;
+    color: #069892;
+  }
+
+  .proc-info strong {
+    display: block;
+    font-size: 0.875rem;
+    color: #ffffff;
+    margin-bottom: 0.15rem;
+  }
+
+  .proc-info span {
+    font-size: 0.8125rem;
+    color: #737373;
+    line-height: 1.4;
+  }
+
+  .direct-support-box {
+    background-color: #050505;
+    border: 1px solid #141414;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+  }
+
+  .support-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #004f5b;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .support-text {
+    font-size: 0.8125rem;
+    color: #888888;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.5;
+  }
+
+  /* Colonna Destra / Modulo */
+  .editorial-form {
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+    border-radius: 0.35rem;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #737373;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background-color: #000000;
+    border: 1px solid #1f1f1f;
+    border-radius: 0.25rem;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  input::placeholder {
+    color: #444444;
+  }
+
+  input:focus, select:focus {
+    border-color: #069892;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23069892'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    cursor: pointer;
+  }
+
+  select option {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .form-submit-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .privacy-notice {
+    font-size: 0.6875rem;
+    color: #555555;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Bottoni */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-solid {
+    background-color: #069892;
+    color: #000000;
+    border: 1px solid #069892;
+  }
+
+  .btn-solid:hover {
+    background-color: #05807a;
+    border-color: #05807a;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #222222;
+  }
+
+  .btn-outline:hover {
+    border-color: #069892;
+    color: #069892;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lead-section {
+      padding: 4rem 1.25rem;
+    }
+
+    .editorial-form {
+      padding: 1.75rem 1.25rem;
+    }
+
+    .input-row {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>
