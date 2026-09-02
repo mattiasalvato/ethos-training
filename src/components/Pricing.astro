@@ -14,6 +14,8 @@ const {
 } = Astro.props;
 
 const savings = Number(fullPrice) - Number(promoPrice);
+const discountPercent = Math.round((savings / Number(fullPrice)) * 100);
+
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
   "Ciao! Vorrei bloccare l'offerta annuale da €580 di Ethos Training Club."
 )}`;
@@ -65,7 +67,7 @@ const inclusions = [
       </h2>
       <p class="section-lead">
         Condizioni riservate esclusivamente ai primi <strong>{maxSpots} iscritti</strong>. 
-        Una quota annuale bloccata per chi sceglie di costruire il percorso fin dal primo giorno.
+        Un percorso che include programmazione, test funzionale e supporto del Personal Trainer a una frazione del costo di mercato.
       </p>
     </div>
 
@@ -76,24 +78,29 @@ const inclusions = [
       <div class="tier-card">
         <div class="tier-header">
           <div class="tier-badge-row">
-            <span class="tier-code">FND-30</span>
-            <span class="tier-saving">Risparmio di €{savings}</span>
+            <span class="tier-saving-badge">RISPARMI (-{discountPercent}%)</span>
           </div>
           <h3 class="tier-name">Abbonamento Annuale</h3>
           <p class="tier-sub">Programma completo Mini Class TriFit per 12 mesi</p>
         </div>
 
+        <!-- Blocco Prezzo con Confronto Evidente -->
         <div class="tier-price-row">
           <div class="price-val">
             <span class="curr">€</span>
             <span class="amount">{promoPrice}</span>
             <span class="freq">/anno</span>
           </div>
-          <div class="price-retail">
-            <span class="retail-label">Listino Ufficiale</span>
-            <span class="retail-amount">€{fullPrice}</span>
+          
+          <div class="price-retail-block">
+            <span class="retail-tag">Prezzo di Listino</span>
+            <div>
+              <span class="curr">€</span>
+              <span class="retail-amount">{fullPrice}</span>
+            </div>
           </div>
         </div>
+
 
         <div class="inclusions-list">
           <span class="list-heading">Protocollo Incluso:</span>
@@ -110,9 +117,9 @@ const inclusions = [
 
         <div class="tier-actions">
           <a href="#preiscrizione" class="btn btn-solid">
-            Blocca la Quota Founding Member
+            Blocca la Quota a €{promoPrice} (Sconto -{discountPercent}%)
           </a>
-          <span class="limit-caption">Nessun pagamento richiesto online &bull; Riservato a {maxSpots} posti</span>
+          <span class="limit-caption">Nessun pagamento richiesto online &bull; Al termine dei {maxSpots} posti si passa a €{fullPrice}</span>
         </div>
       </div>
 
@@ -248,6 +255,7 @@ const inclusions = [
   .tier-card {
     background-color: #050505;
     border: 1px solid #1f1f1f;
+    border-left: 3px solid #069892;
     border-radius: 0.35rem;
     padding: 2.5rem 2rem;
     display: flex;
@@ -270,16 +278,19 @@ const inclusions = [
   .tier-code {
     font-family: 'Michroma', sans-serif;
     font-size: 0.6875rem;
-    color: #069892;
+    color: #737373;
     letter-spacing: 0.1em;
   }
 
-  .tier-saving {
-    font-size: 0.75rem;
+  .tier-saving-badge {
+    background-color: #069892;
+    color: #000000;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.6875rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #004f5b;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.2rem;
   }
 
   .tier-name {
@@ -296,14 +307,16 @@ const inclusions = [
     margin: 0;
   }
 
-  /* Price Area */
+  /* Price Area Riprogettata */
   .tier-price-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid #1a1a1a;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .price-val {
@@ -320,7 +333,7 @@ const inclusions = [
 
   .amount {
     font-family: 'Michroma', sans-serif;
-    font-size: 3.25rem;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 1;
     color: #ffffff;
@@ -332,23 +345,73 @@ const inclusions = [
     margin-left: 0.2rem;
   }
 
-  .price-retail {
+  .price-retail-block {
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .retail-label {
-    display: block;
+  .retail-tag {
     font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #555555;
+    color: #737373;
     margin-bottom: 0.15rem;
   }
 
   .retail-amount {
-    font-size: 0.9375rem;
-    color: #737373;
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.5rem;
+    color: #666666;
     text-decoration: line-through;
+    line-height: 1;
+  }
+
+  /* Value Anchor Box */
+  .value-anchor-box {
+    background-color: #0a0a0a;
+    border: 1px solid #141414;
+    border-left: 2px solid #004f5b;
+    border-radius: 0.25rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .anchor-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #737373;
+    margin-bottom: 0.6rem;
+  }
+
+  .anchor-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .anchor-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .text-strike {
+    color: #555555;
+    text-decoration: line-through;
+  }
+
+  .highlight-row {
+    color: #ffffff;
+    font-weight: 600;
+    border-top: 1px solid #141414;
+    padding-top: 0.5rem;
   }
 
   /* Lista Inclusi */
@@ -553,7 +616,17 @@ const inclusions = [
     }
 
     .amount {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
+    }
+
+    .retail-amount {
+      font-size: 1.2rem;
+    }
+
+    .anchor-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
     }
   }
 </style>
