@@ -1,36 +1,41 @@
 ---
-interface GalleryItem {
+interface WIPItem {
   id: string;
   tag: string;
   title: string;
   desc: string;
-  imageSrc?: string;
-  aspectRatio?: string;
+  imageSrc: string;
 }
 
-const items: GalleryItem[] = [
-  {
-    id: "LOC-01",
-    tag: "Layout & Spazio",
-    title: "Area Funzionale TriFit",
-    desc: "Progettazione degli spazi con postazioni dedicate per azzerare le attese e mantenere il focus sul movimento.",
-    aspectRatio: "4 / 3",
-  },
-  {
-    id: "EQP-02",
-    tag: "Dotazione",
-    title: "Setup Tecnico Selezionato",
-    desc: "Attrezzature essenziali e modulari per corpo libero, sovraccarichi controllati e condizionamento metabolico.",
-    aspectRatio: "4 / 3",
-  },
-  {
-    id: "WIP-03",
-    tag: "Stato Lavori",
-    title: "Cantiere in Definizione",
-    desc: "Finiture acustiche, pavimentazione tecnica gommata e illuminazione a binario studiate per la concentrazione.",
-    aspectRatio: "4 / 3",
-  },
-];
+interface Props {
+  items?: WIPItem[];
+}
+
+const {
+  items = [
+    {
+      id: "01",
+      tag: "SPAZI & PAVIMENTAZIONE",
+      title: "Disposizione Sala & Specchiere",
+      desc: "Allestimento della sala principale, orientamento delle stazioni di carico e verifica delle superfici a specchio per il controllo posturale.",
+      imageSrc: "images/cantiere-1.jpeg",
+    },
+    {
+      id: "02",
+      tag: "IMPIANTI & LIGHTING",
+      title: "Linee LED & Soffitto Tecnico",
+      desc: "Posa delle linee di luce LED continue a soffitto per garantire un'illuminazione uniforme senza abbagliare durante gli esercizi.",
+      imageSrc: "images/cantiere-2.jpeg",
+    },
+    {
+      id: "03",
+      tag: "POSTAZIONI TRIFIT",
+      title: "Definizione Volumi & Aree",
+      desc: "Organizzazione degli spazi e delimitazione delle zone Mini Class per garantire privacy e massima libertà di movimento.",
+      imageSrc: "images/cantiere-3.jpeg",
+    },
+  ]
+} = Astro.props;
 ---
 
 <section id="club" class="gallery-section">
@@ -38,55 +43,45 @@ const items: GalleryItem[] = [
     
     <!-- Meta Bar Superiore -->
     <div class="section-meta">
-      <span class="section-number">03 / SPAZI</span>
-      <span class="section-tag">Architettura del Club</span>
+      <span class="section-number">03 / CANTIERE</span>
+      <div class="live-status">
+        <span class="dot-live"></span>
+        <span>Lavori in Corso &bull; S. Bonifacio</span>
+      </div>
     </div>
 
-    <!-- Header Editoriale Asimmetrico -->
+    <!-- Header Editoriale Pulito -->
     <div class="header-grid">
       <h2 class="section-title">
-        La Struttura.<br />
-        <span class="text-accent">Dietro le quinte.</span>
+        Il Club Prende Forma.<br />
+        <span class="text-accent">Anteprima Lavori.</span>
       </h2>
       <p class="section-lead">
-        Uno spazio concepito per rimuovere il disordine visivo e l'affollamento tipico dei grandi centri fitness. 
-        Un ambiente intimo, minimale ed efficiente.
+        Uno sguardo trasparente sul cantiere del nuovo spazio. Stiamo curando ogni dettaglio strutturale prima dell'apertura ufficiale.
       </p>
     </div>
 
-    <!-- Griglia Fotografica Architetturale -->
+    <!-- Griglia Fotografica a 3 Immagini -->
     <div class="gallery-grid">
       {items.map((item) => (
         <article class="gallery-card">
-          
-          <div class="image-frame">
-            {item.imageSrc ? (
-              <img src={item.imageSrc} alt={item.title} class="card-img" />
-            ) : (
-              <div class="placeholder-frame">
-                <div class="blueprint-crosshair top-left"></div>
-                <div class="blueprint-crosshair top-right"></div>
-                <div class="blueprint-crosshair bottom-left"></div>
-                <div class="blueprint-crosshair bottom-right"></div>
-                
-                <div class="placeholder-content">
-                  <span class="blueprint-code">{item.id}</span>
-                  <span class="blueprint-label">Foto / Render in Arrivo</span>
-                </div>
-              </div>
-            )}
-            
-            <div class="frame-tag">{item.tag}</div>
+          <div class="image-wrapper">
+            <img 
+              src={item.imageSrc} 
+              alt={item.title} 
+              class="card-img" 
+              loading="lazy"
+            />
+            <span class="card-tag">{item.tag}</span>
           </div>
 
-          <div class="card-caption">
-            <div class="caption-header">
-              <span class="item-id">{item.id}</span>
+          <div class="card-body">
+            <div class="card-header-row">
+              <span class="card-num">{item.id}</span>
               <h3 class="card-title">{item.title}</h3>
             </div>
             <p class="card-desc">{item.desc}</p>
           </div>
-
         </article>
       ))}
     </div>
@@ -133,13 +128,27 @@ const items: GalleryItem[] = [
     font-weight: 700;
   }
 
-  /* Header Asimmetrico */
+  .live-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a3a3a3;
+  }
+
+  .dot-live {
+    width: 6px;
+    height: 6px;
+    background-color: #069892;
+    border-radius: 50%;
+  }
+
+  /* Header */
   .header-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 3.5rem;
     align-items: end;
-    margin-bottom: 4.5rem;
+    margin-bottom: 3.5rem;
   }
 
   .section-title {
@@ -164,20 +173,20 @@ const items: GalleryItem[] = [
     padding-left: 1.25rem;
   }
 
-  /* Griglia Schede */
+  /* Griglia 3 Foto */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
 
   .gallery-card {
-    display: flex;
-    flex-direction: column;
     background-color: #050505;
     border: 1px solid #141414;
     border-radius: 0.25rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition: border-color 0.2s ease;
   }
 
@@ -185,13 +194,11 @@ const items: GalleryItem[] = [
     border-color: #004f5b;
   }
 
-  /* Frame Fotografico / Blueprint Placeholder */
-  .image-frame {
+  .image-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
     background-color: #0a0a0a;
-    border-bottom: 1px solid #141414;
     overflow: hidden;
   }
 
@@ -199,7 +206,7 @@ const items: GalleryItem[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(15%) contrast(105%);
+    filter: grayscale(20%) contrast(105%);
     transition: transform 0.4s ease, filter 0.4s ease;
   }
 
@@ -208,61 +215,13 @@ const items: GalleryItem[] = [
     filter: grayscale(0%) contrast(105%);
   }
 
-  /* Placeholder Architettonico Tecnico */
-  .placeholder-frame {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: 
-      linear-gradient(to right, #111111 1px, transparent 1px) 0 0 / 24px 24px,
-      linear-gradient(to bottom, #111111 1px, transparent 1px) 0 0 / 24px 24px;
-    background-color: #080808;
-  }
-
-  .blueprint-crosshair {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-color: #004f5b;
-    border-style: solid;
-  }
-
-  .top-left { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
-  .top-right { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
-  .bottom-left { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
-  .bottom-right { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
-
-  .placeholder-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .blueprint-code {
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.8125rem;
-    color: #069892;
-    letter-spacing: 0.1em;
-  }
-
-  .blueprint-label {
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #555555;
-  }
-
-  .frame-tag {
+  .card-tag {
     position: absolute;
     bottom: 12px;
     left: 12px;
-    background: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.85);
     border: 1px solid #1f1f1f;
-    color: #e5e5e5;
+    color: #069892;
     font-size: 0.6875rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -271,26 +230,23 @@ const items: GalleryItem[] = [
     border-radius: 0.2rem;
   }
 
-  /* Caption Editoriale */
-  .card-caption {
+  .card-body {
     padding: 1.5rem 1.25rem 1.75rem;
     display: flex;
     flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .card-header-row {
+    display: flex;
+    align-items: baseline;
     gap: 0.75rem;
   }
 
-  .caption-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .item-id {
+  .card-num {
     font-family: 'Michroma', sans-serif;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: #004f5b;
-    font-weight: 700;
-    letter-spacing: 0.05em;
   }
 
   .card-title {
@@ -298,7 +254,7 @@ const items: GalleryItem[] = [
     font-size: 0.9375rem;
     color: #ffffff;
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   .card-desc {
@@ -313,7 +269,7 @@ const items: GalleryItem[] = [
     .header-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 2.5rem;
     }
 
     .gallery-grid {
@@ -327,7 +283,7 @@ const items: GalleryItem[] = [
       padding: 4rem 1.25rem;
     }
 
-    .card-caption {
+    .card-body {
       padding: 1.25rem 1rem 1.5rem;
     }
   }
