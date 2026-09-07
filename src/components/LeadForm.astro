@@ -1,13 +1,14 @@
 ---
 interface Props {
-  notificationEmail?: string;
+  googleSheetEndpoint?: string;
   whatsappNumber?: string;
   promoPrice?: string;
   maxSpots?: number;
 }
 
 const {
-  notificationEmail = "info@ethostrainingclub.it",
+  // Incolla qui l'URL generato dal deployment della tua Web App Google Apps Script
+  googleSheetEndpoint = "https://script.google.com/macros/s/AKfycbyorxkS77dd12sqHZjqW5zXrzf5_Hnbhpmo0MviDm8VdpW0pTHeMEpeybKt-cj22g/exec",
   whatsappNumber = "3773364103",
   promoPrice = "580",
   maxSpots = 30,
@@ -34,7 +35,7 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
       <div class="form-aside">
         <h2 class="form-title">
           Blocca la Tariffa.<br />
-          <span class="text-accent">Accesso </span>
+          <span class="text-accent">Accesso a €{promoPrice}.</span>
         </h2>
 
         <p class="form-lead">
@@ -74,37 +75,32 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
         </div>
       </div>
 
-      <!-- Colonna Destra: Modulo Editoriale -->
+      <!-- Colonna Destra: Modulo Editoriale Collegato a Google Fogli -->
       <div class="form-main">
         <form 
-          action={`https://formsubmit.co/${notificationEmail}`} 
-          method="POST" 
+          id="ethos-lead-form" 
           class="editorial-form"
+          data-endpoint={googleSheetEndpoint}
         >
-          <!-- Parametri Antispam & Notifica -->
-          <input type="hidden" name="_subject" value="Nuova Pre-iscrizione Founding Member - Ethos Training Club" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="_honey" style="display:none" />
-
           <div class="input-row">
             <div class="input-field">
               <label for="nome">Nome *</label>
-              <input type="text" id="nome" name="Nome" required placeholder="Nome" />
+              <input type="text" id="nome" name="Nome" required placeholder="Nome" autocomplete="given-name" />
             </div>
             <div class="input-field">
               <label for="cognome">Cognome *</label>
-              <input type="text" id="cognome" name="Cognome" required placeholder="Cognome" />
+              <input type="text" id="cognome" name="Cognome" required placeholder="Cognome" autocomplete="family-name" />
             </div>
           </div>
 
           <div class="input-row">
             <div class="input-field">
               <label for="telefono">Cellulare / WhatsApp *</label>
-              <input type="tel" id="telefono" name="Telefono" required placeholder="333 0000000" />
+              <input type="tel" id="telefono" name="Telefono" required placeholder="333 0000000" autocomplete="tel" />
             </div>
             <div class="input-field">
               <label for="email">Indirizzo Email *</label>
-              <input type="email" id="email" name="Email" required placeholder="nome@email.it" />
+              <input type="email" id="email" name="Email" required placeholder="nome@email.it" autocomplete="email" />
             </div>
           </div>
 
@@ -119,9 +115,12 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
           </div>
 
           <div class="form-submit-group">
-            <button type="submit" class="btn btn-solid">
-              Invia Richiesta e Blocca Quota
+            <button type="submit" id="submit-btn" class="btn btn-solid">
+              <span id="btn-text">Invia Richiesta e Blocca Quota</span>
             </button>
+            
+            <div id="form-feedback" class="feedback-msg" style="display: none;"></div>
+
             <span class="privacy-notice">
               I dati forniti saranno utilizzati esclusivamente per definire la pre-iscrizione nel rispetto del GDPR.
             </span>
@@ -133,6 +132,61 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
 
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('ethos-lead-form') as HTMLFormElement;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLSpanElement;
+  const feedback = document.getElementById('form-feedback') as HTMLDivElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const endpointUrl = form.dataset.endpoint;
+
+    if (!endpointUrl || endpointUrl.includes('INSERISCI_QUI')) {
+      feedback.textContent = 'Errore di configurazione: inserisci l\'URL della Web App di Google Apps Script.';
+      feedback.className = 'feedback-msg error';
+      feedback.style.display = 'block';
+      return;
+    }
+
+    // Stato di caricamento
+    btn.disabled = true;
+    btnText.textContent = 'Registrazione in corso...';
+    feedback.style.display = 'none';
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      await fetch(endpointUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8', // Compatibile con il parser standard di Apps Script
+        },
+        body: JSON.stringify(payload),
+        mode: 'no-cors', // Evita il blocco CORS di Google Apps Script nel browser
+      });
+
+      // Feedback di conferma
+      feedback.innerHTML = '✓ Richiesta ricevuta. La reception ti contatterà per finalizzare la quota Founding Member.';
+      feedback.className = 'feedback-msg success';
+      feedback.style.display = 'block';
+
+      form.reset();
+      btnText.textContent = 'Quota Bloccata con Successo';
+    } catch (err) {
+      console.error('Errore invio form:', err);
+      feedback.innerHTML = 'Si è verificato un errore durante l\'invio. Contattaci direttamente su WhatsApp.';
+      feedback.className = 'feedback-msg error';
+      feedback.style.display = 'block';
+      
+      btn.disabled = false;
+      btnText.textContent = 'Riprova';
+    }
+  });
+</script>
 
 <style>
   *, *::before, *::after {
@@ -339,6 +393,27 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
     margin-top: 0.5rem;
   }
 
+  /* Feedback Messaggi */
+  .feedback-msg {
+    padding: 0.85rem 1rem;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  .feedback-msg.success {
+    background-color: #021a1d;
+    border: 1px solid #069892;
+    color: #069892;
+  }
+
+  .feedback-msg.error {
+    background-color: #1a0808;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+  }
+
   .privacy-notice {
     font-size: 0.6875rem;
     color: #555555;
@@ -364,13 +439,18 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
     text-align: center;
   }
 
+  .btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
   .btn-solid {
     background-color: #069892;
     color: #000000;
     border: 1px solid #069892;
   }
 
-  .btn-solid:hover {
+  .btn-solid:hover:not(:disabled) {
     background-color: #05807a;
     border-color: #05807a;
   }
