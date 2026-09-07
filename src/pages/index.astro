@@ -12,14 +12,19 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Ethos Training Club | Pre-Iscrizioni Founding Member">
-  <ScarcityBanner totalSpots={30} claimedSpots={22} promoPrice="580" fullPrice="960" />
+  <ScarcityBanner totalSpots={30} claimedSpots={22} promoPrice="660" fullPrice="1200" />
   <Navbar maxSpots={30} />
   <main>
-    <Hero maxSpots={30} promoPrice="580" fullPrice="960" />
+    <Hero 
+      promoPrice="660" 
+      fullPrice="1200" 
+      maxSpots={30} 
+      whatsappNumber="3773364103"
+    />
     <TriFit />
     <Gallery />
-    <Pricing maxSpots={30} promoPrice="580" fullPrice="960" />
-    <LeadForm maxSpots={30} promoPrice="580" />
+    <Pricing maxSpots={30} promoPrice="660" fullPrice="1200" />
+    <LeadForm maxSpots={30} promoPrice="660" />
     <Faq />
   </main>
   <Footer />

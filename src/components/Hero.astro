@@ -9,25 +9,26 @@ interface Props {
 
 const {
   whatsappNumber = "3773364103",
-  promoPrice = "580",
-  fullPrice = "960",
+  promoPrice = "660",
+  fullPrice = "1200",
   maxSpots = 30,
-  backgroundImage = "/images/gym-preview.jpg", // Sostituisci col percorso del render o foto reale
+  backgroundImage = "/images/gym-preview.jpg",
 } = Astro.props;
 
+const savings = Number(fullPrice) - Number(promoPrice);
+const discountPercent = Math.round((savings / Number(fullPrice)) * 100);
+
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei maggiori informazioni sulla pre-iscrizione Founding Member di Ethos Training Club."
+  "Ciao! Vorrei maggiori informazioni sulla promo Founding Member (€660) e sulla prova di 15-20 giorni di Ethos Training Club."
 )}`;
 ---
 
 <section class="hero-editorial">
-  <!-- Immagine di sfondo con overlay scuro ad alto contrasto -->
   <div class="hero-bg-layer" style={`background-image: url('${backgroundImage}');`}></div>
   <div class="hero-overlay"></div>
   <div class="top-line"></div>
 
   <div class="container">
-    
     <div class="meta-bar">
       <div class="meta-label">
         <span class="dot-live"></span>
@@ -51,31 +52,46 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
           <span class="divider">/</span>
           <span class="tag">Mini Class Dedicate</span>
           <span class="divider">/</span>
-          <span class="tag">Personal Tracking</span>
+          <span class="tag">Sala Pesi Assistita</span>
         </div>
       </div>
 
       <div class="hero-aside">
         <p class="manifesto">
-          Un approccio che supera il caos delle palestre tradizionali. 
-          Uniamo la motivazione del piccolo gruppo al rigore tecnico 
-          di una programmazione costruita sui tuoi obiettivi reali.
+          Uno spazio che unisce la disciplina della Sala Pesi seguita costantemente dal Personal Trainer all'energia delle Mini Class a numero chiuso. Provalo con la formula iniziale di <strong>15-20 giorni</strong>.
         </p>
 
         <div class="offer-box">
-          <div class="offer-data">
+          <div class="offer-header">
             <span class="offer-badge">Founding Member</span>
-            <div class="price-wrap">
+            <span class="discount-pill">-{discountPercent}% SCONTO</span>
+          </div>
+
+          <div class="price-comparison-block">
+            <div class="price-now">
               <span class="currency">€</span>
               <span class="amount">{promoPrice}</span>
               <span class="unit">/anno</span>
             </div>
-            <span class="full-price">Valore ordinario di listino: €{fullPrice}</span>
+
+            <div class="price-was">
+              <span class="was-label">Invece di</span>
+              <span class="was-amount">€{fullPrice}</span>
+            </div>
+          </div>
+
+          <div class="savings-banner">
+            <span class="savings-icon">✓</span>
+            <span>Risparmi <strong class="text-accent">€{savings}</strong> &bull; Pagabile in 2 o 3 rate</span>
+          </div>
+
+          <div class="trial-pill">
+            <span>Inclusi 15-20 giorni di prova iniziale garantita</span>
           </div>
 
           <div class="actions">
             <a href="#preiscrizione" class="btn btn-solid">
-              Blocca il tuo posto
+              Blocca la Promo a €{promoPrice}
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
               Contattaci via WhatsApp
@@ -89,34 +105,30 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
       <div class="stat-col">
         <span class="stat-num">01</span>
         <div class="stat-info">
-          <strong>Valutazione di 20 min</strong>
-          <span>Anamnesi e test motorio iniziale</span>
+          <strong>Colloquio con Anamnesi</strong>
+          <span>Valutazione dello stato iniziale e dei tuoi obiettivi</span>
         </div>
       </div>
       <div class="stat-col">
         <span class="stat-num">02</span>
         <div class="stat-info">
-          <strong>Scheda da 6 Settimane</strong>
-          <span>Progressione atletica personalizzata</span>
+          <strong>Schede ogni 6 Settimane</strong>
+          <span>Progressione sartoriale su misura</span>
         </div>
       </div>
       <div class="stat-col">
         <span class="stat-num">03</span>
         <div class="stat-info">
-          <strong>2 Sessioni / Settimana</strong>
-          <span>Mini Class seguite da Personal Trainer</span>
+          <strong>Lezione Mini Class con PT</strong>
+          <span>Allenamento assistito e monitoraggio continuo in sala</span>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <style>
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
+  *, *::before, *::after { box-sizing: border-box; }
   .hero-editorial {
     position: relative;
     background-color: #000000;
@@ -126,8 +138,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     font-family: 'Inter', sans-serif;
     overflow: hidden;
   }
-
-  /* Layer immagine con filtro desaturato */
   .hero-bg-layer {
     position: absolute;
     inset: 0;
@@ -138,8 +148,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     z-index: 1;
     transform: scale(1.02);
   }
-
-  /* Gradiente dark per sfumare i bordi e mantenere il contrasto */
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -147,7 +155,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     z-index: 2;
     pointer-events: none;
   }
-
   .top-line {
     position: absolute;
     top: 0;
@@ -157,7 +164,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     background: #069892;
     z-index: 10;
   }
-
   .container {
     position: relative;
     max-width: 1120px;
@@ -165,7 +171,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     width: 100%;
     z-index: 5;
   }
-
   .meta-bar {
     display: flex;
     justify-content: space-between;
@@ -177,30 +182,20 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
-
   .meta-label {
     display: flex;
     align-items: center;
     gap: 0.6rem;
     color: #a3a3a3;
   }
-
   .dot-live {
     width: 7px;
     height: 7px;
     background-color: #069892;
     border-radius: 50%;
   }
-
-  .scarcity-counter {
-    color: #737373;
-  }
-
-  .scarcity-counter strong {
-    color: #ffffff;
-    margin-left: 0.25rem;
-  }
-
+  .scarcity-counter { color: #737373; }
+  .scarcity-counter strong { color: #ffffff; margin-left: 0.25rem; }
   .hero-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -208,7 +203,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     align-items: start;
     margin-bottom: 5rem;
   }
-
   .headline {
     font-family: 'Michroma', sans-serif;
     font-size: clamp(2.2rem, 4.5vw, 3.75rem);
@@ -217,11 +211,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     letter-spacing: -0.02em;
     margin: 0 0 2rem 0;
   }
-
-  .text-accent {
-    color: #069892;
-  }
-
+  .text-accent { color: #069892; }
   .usp-row {
     display: flex;
     flex-wrap: wrap;
@@ -232,11 +222,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     letter-spacing: 0.08em;
     color: #a3a3a3;
   }
-
-  .divider {
-    color: #004f5b;
-  }
-
+  .divider { color: #004f5b; }
   .manifesto {
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -245,63 +231,84 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     border-left: 2px solid #004f5b;
     padding-left: 1.25rem;
   }
-
+  .manifesto strong { color: #ffffff; }
   .offer-box {
-    background: rgba(8, 8, 8, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(8, 8, 8, 0.95);
+    border: 1px solid rgba(6, 152, 146, 0.4);
+    border-left: 3px solid #069892;
     backdrop-filter: blur(8px);
     border-radius: 0.5rem;
     padding: 2rem;
   }
-
+  .offer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
   .offer-badge {
-    display: inline-block;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #069892;
-    margin-bottom: 0.5rem;
+    color: #ffffff;
   }
-
-  .price-wrap {
+  .discount-pill {
+    background-color: #069892;
+    color: #000000;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.2rem;
+  }
+  .price-comparison-block {
     display: flex;
     align-items: baseline;
-    gap: 0.25rem;
-    margin-bottom: 0.35rem;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
   }
-
-  .currency {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #069892;
-  }
-
+  .price-now { display: flex; align-items: baseline; gap: 0.25rem; }
+  .currency { font-size: 1.5rem; font-weight: 700; color: #069892; }
   .amount {
     font-family: 'Michroma', sans-serif;
-    font-size: 2.75rem;
+    font-size: 3.25rem;
     font-weight: 700;
     line-height: 1;
+    color: #ffffff;
   }
-
-  .unit {
-    color: #737373;
-    font-size: 0.9375rem;
+  .unit { color: #737373; font-size: 0.9375rem; }
+  .price-was { display: flex; flex-direction: column; justify-content: center; }
+  .was-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: #737373; }
+  .was-amount {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.4rem;
+    color: #666666;
+    text-decoration: line-through;
+    line-height: 1;
   }
-
-  .full-price {
-    display: block;
-    font-size: 0.8125rem;
-    color: #737373;
-    margin-bottom: 1.75rem;
-  }
-
-  .actions {
+  .savings-banner {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: #cccccc;
+    background-color: #001a1d;
+    border: 1px solid rgba(6, 152, 146, 0.25);
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
   }
-
+  .savings-icon { color: #069892; font-weight: 700; }
+  .trial-pill {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-bottom: 1.5rem;
+    padding-left: 0.25rem;
+  }
+  .trial-pill span { color: #069892; font-weight: 600; }
+  .actions { display: flex; flex-direction: column; gap: 0.75rem; }
   .btn {
     display: inline-flex;
     align-items: center;
@@ -313,32 +320,13 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     letter-spacing: 0.06em;
     text-decoration: none;
     border-radius: 0.35rem;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
   }
-
-  .btn-solid {
-    background-color: #069892;
-    color: #000000;
-    border: 1px solid #069892;
-  }
-
-  .btn-solid:hover {
-    background-color: #05807a;
-    border-color: #05807a;
-  }
-
-  .btn-outline {
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #292929;
-  }
-
-  .btn-outline:hover {
-    border-color: #069892;
-    color: #069892;
-  }
-
+  .btn-solid { background-color: #069892; color: #000000; border: 1px solid #069892; }
+  .btn-solid:hover { background-color: #05807a; }
+  .btn-outline { background-color: transparent; color: #ffffff; border: 1px solid #292929; }
+  .btn-outline:hover { border-color: #069892; color: #069892; }
   .stats-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -346,58 +334,19 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2.5rem;
   }
-
-  .stat-col {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
-  .stat-num {
-    font-family: 'Michroma', sans-serif;
-    font-size: 1.25rem;
-    color: #004f5b;
-  }
-
-  .stat-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .stat-info strong {
-    font-size: 0.9375rem;
-    color: #ffffff;
-  }
-
-  .stat-info span {
-    font-size: 0.8125rem;
-    color: #737373;
-    line-height: 1.4;
-  }
-
+  .stat-col { display: flex; align-items: baseline; gap: 1rem; }
+  .stat-num { font-family: 'Michroma', sans-serif; font-size: 1.25rem; color: #004f5b; }
+  .stat-info { display: flex; flex-direction: column; gap: 0.25rem; }
+  .stat-info strong { font-size: 0.9375rem; color: #ffffff; }
+  .stat-info span { font-size: 0.8125rem; color: #737373; line-height: 1.4; }
   @media (max-width: 900px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .stats-strip {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3.5rem; }
+    .stats-strip { grid-template-columns: 1fr; gap: 1.5rem; }
   }
-
   @media (max-width: 600px) {
-    .meta-bar {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .offer-box {
-      padding: 1.5rem;
-    }
+    .meta-bar { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .offer-box { padding: 1.5rem; }
+    .amount { font-size: 2.5rem; }
+    .was-amount { font-size: 1.2rem; }
   }
 </style>

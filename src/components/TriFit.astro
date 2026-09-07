@@ -9,44 +9,49 @@ interface Pillar {
 const pillars: Pillar[] = [
   {
     id: "01",
-    title: "Valutazione Funzionale",
-    subtitle: "Check-up iniziale & Anamnesi",
-    desc: "Un colloquio dedicato e 20 minuti di test motorio per analizzare mobilità, postura e capacità di carico. Non si inizia mai alla cieca.",
+    title: "Colloquio Dedicato",
+    subtitle: "Check-up Iniziale & Anamnesi",
+    desc: "Un incontro conoscitivo individuale per analizzare la tua storia motoria, lo stato di partenza e concordare gli obiettivi prima di iniziare.",
   },
   {
     id: "02",
-    title: "Programmazione Sartoriale",
-    subtitle: "Scheda da 6 Settimane",
-    desc: "Un protocollo di lavoro individuale calibrato sui tuoi obiettivi reali. La scheda viene costantemente riadattata durante il percorso.",
+    title: "Sala Pesi Assistita",
+    subtitle: "Supervisione PT Costante",
+    desc: "Allenati in Sala Pesi con la sicurezza di un Personal Trainer sempre presente in sala a verificare carichi ed esecuzioni. Scheda personalizzata aggiornata ogni 6 settimane.",
   },
   {
     id: "03",
-    title: "Mini Class con Personal",
-    subtitle: "2 Allenamenti a Settimana",
-    desc: "La sinergia e la costanza del piccolo gruppo unite al controllo tecnico costante del trainer. Zero dispersioni, massima precisione.",
+    title: "Mini Class & Monitoraggio",
+    subtitle: "Prenotazione da App & Supporto Continuo",
+    desc: "Accesso controllato tramite applicazione. Monitoriamo la tua costanza di allenamento e il trainer risponde entro 24 ore a ogni tuo dubbio.",
   },
 ];
 
 const comparisonData = [
   {
-    label: "Rapporto Trainer / Allievo",
-    standard: "1 istruttore per 30–40 persone",
-    ethos: "Mini Class ristrette a numero chiuso",
+    label: "Supervisione in Sala Pesi",
+    standard: "Istruttore assente o condiviso con 30-40 persone",
+    ethos: "Personal Trainer sempre presente e dedicato",
   },
   {
-    label: "Personalizzazione",
-    standard: "Schede preconfezionate e standard",
-    ethos: "Anamnesi e scheda su misura da 6 settimane",
+    label: "Colloquio & Anamnesi",
+    standard: "Assente o solo registrazione burocratica al desk",
+    ethos: "Colloquio iniziale su misura per definire gli obiettivi",
   },
   {
-    label: "Valutazione Iniziale",
-    standard: "Assente o solo burocratica",
-    ethos: "Test funzionale di 20 minuti iniziale",
+    label: "Programmazione Tecnica",
+    standard: "Schede generiche e standardizzate uguali per tutti",
+    ethos: "Scheda sartoriale aggiornata ogni 6 settimane",
   },
   {
-    label: "Gestione Spazi & Attese",
+    label: "Monitoraggio Costanza",
+    standard: "Nessuno nota se salti le sessioni",
+    ethos: "Controllo presenze e risposta del PT entro 24 ore",
+  },
+  {
+    label: "Gestione Afflusso & Attese",
     standard: "Attese ai macchinari e sovraffollamento",
-    ethos: "Postazione dedicata e accesso programmato",
+    ethos: "Accesso a numero controllato tramite App",
   },
 ];
 ---
@@ -54,20 +59,20 @@ const comparisonData = [
 <section id="metodo" class="trifit-section">
   <div class="container">
     
-    <!-- Intestazione Sezione Editoriale -->
+    <!-- Meta Bar Superiore -->
     <div class="section-meta">
       <span class="section-number">02 / METODO</span>
-      <span class="section-tag">Sistema TriFit</span>
+      <span class="section-tag">Metodo TriFit & Sala Pesi Assistita</span>
     </div>
 
+    <!-- Header Editoriale -->
     <div class="header-grid">
       <h2 class="section-title">
-        L'efficacia del Personal.<br />
-        <span class="text-accent">L'energia della classe.</span>
+        La Sala Pesi con PT.<br />
+        <span class="text-accent">L'efficacia del Metodo.</span>
       </h2>
       <p class="section-lead">
-        Il sistema TriFit supera i limiti dei corsi affollati e delle schede generiche. 
-        Ogni sessione in Mini Class è strutturata attorno al tuo livello di partenza e ai tuoi obiettivi individuali.
+        Il Metodo TriFit supera l'abbandono tipico delle palestre tradizionali. Uniamo il monitoraggio costante del Personal Trainer in Sala Pesi e nelle Mini Class a una gestione controllata degli accessi.
       </p>
     </div>
 
@@ -88,12 +93,12 @@ const comparisonData = [
       ))}
     </div>
 
-    <!-- Tabella Comparativa Riprogettata ad Alto Contrasto -->
+    <!-- Tabella Comparativa ad Alto Impatto -->
     <div class="comparison-wrapper">
       <div class="comparison-top-bar">
         <div>
-          <h3 class="comparison-heading">Standard Tradizionale vs Metodo Ethos</h3>
-          <span class="comparison-sub">Differenze sostanziali di approccio e monitoraggio</span>
+          <h3 class="comparison-heading">Palestra Tradizionale vs Metodo Ethos</h3>
+          <span class="comparison-sub">La differenza sostanziale di approccio, assistenza e monitoraggio</span>
         </div>
         <span class="comparison-pill">Confronto Diretto</span>
       </div>
@@ -153,6 +158,7 @@ const comparisonData = [
     width: 100%;
   }
 
+  /* Section Meta */
   .section-meta {
     display: flex;
     justify-content: space-between;
@@ -171,6 +177,7 @@ const comparisonData = [
     font-weight: 700;
   }
 
+  /* Header */
   .header-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -268,7 +275,7 @@ const comparisonData = [
     margin: 0;
   }
 
-  /* Nuova Tabella Comparativa ad Alto Impatto */
+  /* Tabella Comparativa */
   .comparison-wrapper {
     background-color: #050505;
     border: 1px solid #1a1a1a;

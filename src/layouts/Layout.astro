@@ -37,8 +37,42 @@ const {
   </body>
 </html>
 
+<script is:inline>
+  // Rileva e sostituisce ogni € nel testo avvolgendolo con un font leggibile
+  document.addEventListener('DOMContentLoaded', () => {
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null
+    );
+
+    const textNodes = [];
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue.includes('€')) {
+        textNodes.push(walker.currentNode);
+      }
+    }
+
+    textNodes.forEach((node) => {
+      const parent = node.parentNode;
+      if (parent && parent.nodeName !== 'SCRIPT' && parent.nodeName !== 'STYLE') {
+        const span = document.createElement('span');
+        span.innerHTML = node.nodeValue.replace(/€/g, '<span class="clean-euro">€</span>');
+        parent.replaceChild(span, node);
+      }
+    });
+  });
+</script>
+
 <style is:global>
-  *, *::before, *::after {
+  .clean-euro {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 0.12em;
+    font-style: normal;
+  }
+   *, *::before, *::after {
     box-sizing: border-box;
   }
 
@@ -54,6 +88,7 @@ const {
     background-color: #000000;
     overflow-x: hidden;
   }
+  
 
   /* Barra di scorrimento minimale scura */
   ::-webkit-scrollbar {

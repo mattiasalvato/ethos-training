@@ -7,10 +7,15 @@
 html {
   scroll-behavior: smooth;
 }
-
-body {
+/* Forza il simbolo euro a usare un font reale e non il glifo rotto di Michroma */
+@font-face {
+  font-family: 'MichromaEuroFix';
+  src: local('Inter'), local('Arial'), sans-serif;
+  unicode-range: U+20AC; /* Codice Unicode univoco del simbolo € */
+}
+body, h1, h2, h3, .headline, .amount {
   background-color: #000000;
-  font-family: 'Inter', sans-serif;
+  font-family: 'MichromaEuroFix', 'Michroma', sans-serif;
   color: #ffffff;
   overflow-x: hidden;
 }

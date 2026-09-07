@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  promoPrice = "580",
-  fullPrice = "960",
+  promoPrice = "660",
+  fullPrice = "1200",
   maxSpots = 30,
   whatsappNumber = "3773364103",
 } = Astro.props;
@@ -17,7 +17,7 @@ const savings = Number(fullPrice) - Number(promoPrice);
 const discountPercent = Math.round((savings / Number(fullPrice)) * 100);
 
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei bloccare l'offerta annuale da €580 di Ethos Training Club."
+  "Ciao! Vorrei informazioni sulla promo Founding Member da €660 (anche a rate) e sulla prova di 15-20 giorni di Ethos Training Club."
 )}`;
 
 const schedule = [
@@ -29,23 +29,23 @@ const schedule = [
 const inclusions = [
   {
     num: "01",
-    title: "Colloquio & Anamnesi",
-    desc: "Valutazione clinico-sportiva e definizione degli obiettivi.",
+    title: "Colloquio Dedicato con Anamnesi",
+    desc: "Incontro individuale conoscitivo per valutare stato iniziale, esigenze specifiche e obiettivi.",
   },
   {
     num: "02",
-    title: "Valutazione Funzionale (20 min)",
-    desc: "Test motorio iniziale di mobilità e forza.",
+    title: "Sala Pesi con PT Costante",
+    desc: "Accesso continuativo con scheda su misura rinnovata ogni 6 settimane e assistenza continua del trainer.",
   },
   {
     num: "03",
-    title: "Scheda Individuale (6 Settimane)",
-    desc: "Programmazione sartoriale aggiornata progressivamente.",
+    title: "Corsi Mini Class Metodo TriFit",
+    desc: "Sessioni guidate in piccolo gruppo a numero chiuso per la massima efficacia tecnica.",
   },
   {
     num: "04",
-    title: "2 Mini Class / Settimana",
-    desc: "Sessioni in piccolo gruppo con monitoraggio TriFit dedicato.",
+    title: "Prenotazione App & Risposta in 24h",
+    desc: "Gestione accessi senza affollamento tramite App e supporto del trainer garantito per qualsiasi dubbio.",
   },
 ];
 ---
@@ -66,8 +66,8 @@ const inclusions = [
         <span class="text-accent">Accesso Riservato.</span>
       </h2>
       <p class="section-lead">
-        Condizioni riservate esclusivamente ai primi <strong>{maxSpots} iscritti</strong>. 
-        Un percorso che include programmazione, test funzionale e supporto del Personal Trainer a una frazione del costo di mercato.
+        Quota speciale riservata ai primi <strong>{maxSpots} iscritti</strong>. 
+        Tutto compreso per 12 mesi: Sala Pesi con Personal Trainer dedicato, Mini Class TriFit e la garanzia di prova iniziale di <strong>15-20 giorni</strong>.
       </p>
     </div>
 
@@ -78,13 +78,14 @@ const inclusions = [
       <div class="tier-card">
         <div class="tier-header">
           <div class="tier-badge-row">
-            <span class="tier-saving-badge">RISPARMI (-{discountPercent}%)</span>
+            <span class="tier-code">FND-30</span>
+            <span class="tier-saving-badge">RISPARMI €{savings} (-{discountPercent}%)</span>
           </div>
-          <h3 class="tier-name">Abbonamento Annuale</h3>
-          <p class="tier-sub">Programma completo Mini Class TriFit per 12 mesi</p>
+          <h3 class="tier-name">Abbonamento Annuale All-Inclusive</h3>
+          <p class="tier-sub">Sala Pesi assistita + Mini Class TriFit per 12 mesi</p>
         </div>
 
-        <!-- Blocco Prezzo con Confronto Evidente -->
+        <!-- Blocco Prezzo -->
         <div class="tier-price-row">
           <div class="price-val">
             <span class="curr">€</span>
@@ -94,16 +95,25 @@ const inclusions = [
           
           <div class="price-retail-block">
             <span class="retail-tag">Prezzo di Listino</span>
-            <div>
-              <span class="curr">€</span>
-              <span class="retail-amount">{fullPrice}</span>
-            </div>
+            <span class="retail-amount">€{fullPrice}</span>
           </div>
         </div>
 
+        <!-- Rateizzazione e Prova -->
+        <div class="installments-box">
+          <div class="inst-item">
+            <span class="inst-label">Rateizzazione Senza Costi Aggiuntivi:</span>
+            <strong class="inst-val">2 rate da €330 &bull; oppure 3 rate da €220</strong>
+          </div>
+          <div class="inst-item highlight-inst">
+            <span class="inst-label">Periodo di Prova:</span>
+            <strong class="text-accent">15-20 giorni di prova garantita all'apertura</strong>
+          </div>
+        </div>
 
+        <!-- Protocollo Incluso -->
         <div class="inclusions-list">
-          <span class="list-heading">Protocollo Incluso:</span>
+          <span class="list-heading">Incluso nella Quota Founding:</span>
           {inclusions.map((item) => (
             <div class="inc-row">
               <span class="inc-num">{item.num}</span>
@@ -117,16 +127,16 @@ const inclusions = [
 
         <div class="tier-actions">
           <a href="#preiscrizione" class="btn btn-solid">
-            Blocca la Quota a €{promoPrice} (Sconto -{discountPercent}%)
+            Blocca la Quota a €{promoPrice}
           </a>
           <span class="limit-caption">Nessun pagamento richiesto online &bull; Al termine dei {maxSpots} posti si passa a €{fullPrice}</span>
         </div>
       </div>
 
-      <!-- Colonna Laterale: Orari & Info Dirette -->
+      <!-- Colonna Laterale: Orari & Reception -->
       <div class="side-column">
         
-        <!-- Box Orari Architetturale -->
+        <!-- Orari -->
         <div class="side-card">
           <div class="card-meta">
             <span class="card-meta-num">INF-01</span>
@@ -147,15 +157,15 @@ const inclusions = [
           </div>
         </div>
 
-        <!-- Box Contatto Reception -->
+        <!-- Reception WhatsApp -->
         <div class="side-card side-card-support">
           <div class="card-meta">
             <span class="card-meta-num">INF-02</span>
             <span class="card-meta-tag">Canale Diretto</span>
           </div>
-          <h3 class="side-title">Assistenza Reception</h3>
+          <h3 class="side-title">Supporto Reception</h3>
           <p class="side-desc">
-            Hai domande su orari specifici, livelli di allenamento o vuoi confermare la disponibilità via chat?
+            Vuoi concordare il pagamento in 2 o 3 rate, richiedere dettagli sugli orari o informazioni sulla prova iniziale?
           </p>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Scrivi al 377 3364103
@@ -307,7 +317,7 @@ const inclusions = [
     margin: 0;
   }
 
-  /* Price Area Riprogettata */
+  /* Prezzo */
   .tier-price-row {
     display: flex;
     justify-content: space-between;
@@ -368,53 +378,44 @@ const inclusions = [
     line-height: 1;
   }
 
-  /* Value Anchor Box */
-  .value-anchor-box {
+  /* Rateizzazione & Prova */
+  .installments-box {
     background-color: #0a0a0a;
     border: 1px solid #141414;
     border-left: 2px solid #004f5b;
     border-radius: 0.25rem;
     padding: 1rem 1.25rem;
     margin-bottom: 2rem;
-  }
-
-  .anchor-label {
-    display: block;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #737373;
-    margin-bottom: 0.6rem;
-  }
-
-  .anchor-table {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
+    gap: 0.6rem;
   }
 
-  .anchor-row {
+  .inst-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 0.8125rem;
     gap: 1rem;
   }
 
-  .text-strike {
-    color: #555555;
-    text-decoration: line-through;
+  .inst-label {
+    color: #888888;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
   }
 
-  .highlight-row {
+  .inst-val {
     color: #ffffff;
-    font-weight: 600;
+  }
+
+  .highlight-inst {
     border-top: 1px solid #141414;
     padding-top: 0.5rem;
   }
 
-  /* Lista Inclusi */
+  /* Inclusioni */
   .inclusions-list {
     display: flex;
     flex-direction: column;
@@ -568,7 +569,7 @@ const inclusions = [
     letter-spacing: 0.06em;
     text-decoration: none;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     width: 100%;
     text-align: center;
@@ -596,7 +597,6 @@ const inclusions = [
     color: #069892;
   }
 
-  /* Responsive Rules */
   @media (max-width: 900px) {
     .header-grid {
       grid-template-columns: 1fr;
@@ -623,7 +623,7 @@ const inclusions = [
       font-size: 1.2rem;
     }
 
-    .anchor-row {
+    .inst-item {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.25rem;

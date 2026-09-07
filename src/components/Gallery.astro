@@ -15,24 +15,24 @@ const {
   items = [
     {
       id: "01",
-      tag: "SPAZI & PAVIMENTAZIONE",
-      title: "Disposizione Sala & Specchiere",
-      desc: "Allestimento della sala principale, orientamento delle stazioni di carico e verifica delle superfici a specchio per il controllo posturale.",
-      imageSrc: "images/cantiere-1.jpeg",
+      tag: "ATTREZZATURE NUOVE",
+      title: "Pesi Liberi MATEX & IMPULSE",
+      desc: "Nuova disposizione degli spazi, macchinari professionali MATEX e IMPULSE, con set completi di manubri e bilancieri nuovi appena consegnati.",
+      imageSrc: "/images/cantiere-1.jpg",
     },
     {
       id: "02",
-      tag: "IMPIANTI & LIGHTING",
-      title: "Linee LED & Soffitto Tecnico",
-      desc: "Posa delle linee di luce LED continue a soffitto per garantire un'illuminazione uniforme senza abbagliare durante gli esercizi.",
-      imageSrc: "images/cantiere-2.jpeg",
+      tag: "IMPIANTI & FONDO TECNICO",
+      title: "Pavimentazione & Binari LED",
+      desc: "Posa del pavimento tecnico in gomma vulcanizzata ad alto assorbimento e installazione delle linee LED a soffitto per un fascio diffuso anti-riflesso.",
+      imageSrc: "/images/cantiere-2.jpg",
     },
     {
       id: "03",
-      tag: "POSTAZIONI TRIFIT",
-      title: "Definizione Volumi & Aree",
-      desc: "Organizzazione degli spazi e delimitazione delle zone Mini Class per garantire privacy e massima libertà di movimento.",
-      imageSrc: "images/cantiere-3.jpeg",
+      tag: "HYBRID GYM & SPOGLIATOI",
+      title: "Spazio Funzionale & Armadietti",
+      desc: "Area dedicata all'allenamento funzionale e ibrido con vogatori, slitta e postazioni cross-training, insieme all'allestimento degli armadietti.",
+      imageSrc: "/images/cantiere-3.jpg",
     },
   ]
 } = Astro.props;
@@ -43,25 +43,25 @@ const {
     
     <!-- Meta Bar Superiore -->
     <div class="section-meta">
-      <span class="section-number">03 / CANTIERE</span>
+      <span class="section-number">03 / CANTIERE LIVE</span>
       <div class="live-status">
         <span class="dot-live"></span>
-        <span>Lavori in Corso &bull; S. Bonifacio</span>
+        <span>Avanzamento Lavori &bull; S. Bonifacio</span>
       </div>
     </div>
 
-    <!-- Header Editoriale Pulito -->
+    <!-- Header Editoriale -->
     <div class="header-grid">
       <h2 class="section-title">
-        Il Club Prende Forma.<br />
-        <span class="text-accent">Anteprima Lavori.</span>
+        Tutto Nuovo.<br />
+        <span class="text-accent">Dietro le Quinte.</span>
       </h2>
       <p class="section-lead">
-        Uno sguardo trasparente sul cantiere del nuovo spazio. Stiamo curando ogni dettaglio strutturale prima dell'apertura ufficiale.
+        Uno sguardo trasparente sull'allestimento di Ethos. Dalle attrezzature di livello <strong>MATEX e IMPULSE</strong> al pavimento tecnico, fino all'area Hybrid Gym per il condizionamento metabolico.
       </p>
     </div>
 
-    <!-- Griglia Fotografica a 3 Immagini -->
+    <!-- Griglia Fotografica Pulita a 3 Elementi -->
     <div class="gallery-grid">
       {items.map((item) => (
         <article class="gallery-card">
@@ -109,7 +109,7 @@ const {
     width: 100%;
   }
 
-  /* Section Meta Header */
+  /* Section Meta */
   .section-meta {
     display: flex;
     justify-content: space-between;
@@ -173,7 +173,11 @@ const {
     padding-left: 1.25rem;
   }
 
-  /* Griglia 3 Foto */
+  .section-lead strong {
+    color: #ffffff;
+  }
+
+  /* Griglia Cards */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -206,13 +210,12 @@ const {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(20%) contrast(105%);
-    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: grayscale(15%) contrast(105%);
+    transition: transform 0.4s ease;
   }
 
   .gallery-card:hover .card-img {
     transform: scale(1.03);
-    filter: grayscale(0%) contrast(105%);
   }
 
   .card-tag {

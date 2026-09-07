@@ -1,40 +1,29 @@
 ---
-interface FaqItem {
-  id: string;
+interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqs: FaqItem[] = [
+const faqs: FAQItem[] = [
   {
-    id: "01",
-    question: "Cosa comprende la quota lancio di €580/anno?",
-    answer:
-      "La quota include l'accesso per 12 mesi a 2 Mini Class settimanali col metodo TriFit, il colloquio iniziale con anamnesi, la valutazione funzionale di 20 minuti e la prima scheda personalizzata da 6 settimane.",
+    question: "Come funziona il Colloquio iniziale con anamnesi?",
+    answer: "Prima di toccare qualsiasi peso effettuerai un colloquio individuale con il Personal Trainer. È un momento dedicato ad analizzare la tua storia motoria, verificare eventuali problematiche posturali o articolari e definire obiettivi realistici prima di iniziare il percorso.",
   },
   {
-    id: "02",
-    question: "Come funzionano le Mini Class con metodo TriFit?",
-    answer:
-      "A differenza dei corsi di gruppo generici, ogni partecipante svolge esercizi tarati sulla propria anamnesi e sul proprio livello, con l'assistenza e la correzione costante del trainer dedicato.",
+    question: "Cosa comprende esattamente l'accesso per 12 mesi?",
+    answer: "Comprende l'accesso annuale completo sia alla Sala Pesi (con l'assistenza continua del Personal Trainer sempre presente in sala), valutazione della situazione fisica, schede personalizzate con modifiche periodiche e accesso ai corsi Mini Class con il Metodo TriFit.",
   },
   {
-    id: "03",
-    question: "La pre-iscrizione comporta un pagamento immediato?",
-    answer:
-      "No. La compilazione del modulo serve a bloccare la priorità e la tariffa agevolata da Founding Member (€580 invece di €960). Il pagamento verrà finalizzato alla conferma dell'iscrizione.",
+    question: "Ogni quanto tempo viene aggiornata la scheda di allenamento?",
+    answer: "La programmazione è individuale e sartoriale: ogni 6 settimane il Personal Trainer aggiorna la tua scheda di allenamento in base ai carichi raggiunti e ai feedback registrati nel percorso.",
   },
   {
-    id: "04",
-    question: "Cosa succede se termino le 6 settimane di scheda?",
-    answer:
-      "Viene eseguito un nuovo check di avanzamento e aggiornata la progressione degli allenamenti per continuare a stimolare i progressi in modo sicuro ed efficace.",
+    question: "La quota di €660 può essere rateizzata?",
+    answer: "Sì, per rendere l'accesso più comodo puoi suddividere la quota in 2 rate da €330 oppure in 3 rate da €220 senza alcun costo o interesse aggiuntivo.",
   },
   {
-    id: "05",
-    question: "Quali sono gli orari di apertura del club?",
-    answer:
-      "Siamo aperti dal lunedì al venerdì dalle 07:00 alle 21:00 con orario continuato, il sabato dalle 08:00 alle 17:00 e la domenica dalle 09:00 alle 13:00.",
+    question: "Come funziona la prenotazione degli ingressi tramite App?",
+    answer: "Per azzerare code e sovraffollamento, la struttura accoglie un numero controllato di persone per fascia oraria. Tramite la nostra App potrai prenotare le Mini Class o la tua sessione in Sala Pesi garantendoti sempre spazio e attrezzi liberi.",
   },
 ];
 ---
@@ -44,37 +33,31 @@ const faqs: FaqItem[] = [
     
     <!-- Meta Bar Superiore -->
     <div class="section-meta">
-      <span class="section-number">05 / FAQ</span>
-      <span class="section-tag">Trasparenza & Dettagli</span>
+      <span class="section-number">05 / DOMANDE FREQUENTI</span>
+      <span class="section-tag">FAQ & Chiarezza</span>
     </div>
 
-    <!-- Header Editoriale Asimmetrico -->
+    <!-- Header Editoriale -->
     <div class="header-grid">
       <h2 class="section-title">
-        Domande Frequenti.<br />
-        <span class="text-accent">Chiarezza Totale.</span>
+        Tutto Quello che<br />
+        <span class="text-accent">Devi Sapere.</span>
       </h2>
       <p class="section-lead">
-        Informazioni precise su come accedere alla promozione Founding Member, 
-        il funzionamento del metodo TriFit e le modalità di gestione delle sessioni.
+        Risposte dirette sull'assistenza in Sala Pesi, il Metodo TriFit, la prova iniziale e la gestione dell'abbonamento Founding Member.
       </p>
     </div>
 
-    <!-- Lista FAQ a Linee Pure -->
-    <div class="faq-list">
-      {faqs.map((faq) => (
-        <details class="faq-row">
-          <summary class="faq-summary">
-            <div class="question-wrap">
-              <span class="faq-index">{faq.id}</span>
-              <span class="faq-question-text">{faq.question}</span>
-            </div>
-            <span class="faq-toggle" aria-hidden="true">+</span>
+    <!-- Lista Accordion -->
+    <div class="faq-accordion">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" open={index === 0}>
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
-          <div class="faq-body">
-            <div class="faq-content">
-              <p>{faq.answer}</p>
-            </div>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -128,7 +111,7 @@ const faqs: FaqItem[] = [
     grid-template-columns: 1.2fr 1fr;
     gap: 3.5rem;
     align-items: end;
-    margin-bottom: 4.5rem;
+    margin-bottom: 3.5rem;
   }
 
   .section-title {
@@ -153,129 +136,70 @@ const faqs: FaqItem[] = [
     padding-left: 1.25rem;
   }
 
-  /* Lista FAQ Lineare */
-  .faq-list {
+  /* Accordion */
+  .faq-accordion {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid #1a1a1a;
+    gap: 1rem;
+    max-width: 850px;
   }
 
-  .faq-row {
-    border-bottom: 1px solid #1a1a1a;
-    transition: background-color 0.2s ease;
-  }
-
-  .faq-row:hover {
+  .faq-item {
     background-color: #050505;
+    border: 1px solid #141414;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
   }
 
-  .faq-row[open] {
-    background-color: #050505;
+  .faq-item[open] {
+    border-color: #004f5b;
   }
 
-  .faq-summary {
+  .faq-question {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.75rem 0;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.9375rem;
+    color: #ffffff;
     cursor: pointer;
     list-style: none;
     user-select: none;
   }
 
-  .faq-summary::-webkit-details-marker {
+  .faq-question::-webkit-details-marker {
     display: none;
   }
 
-  .question-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .faq-index {
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.8125rem;
-    color: #069892;
-    flex-shrink: 0;
-  }
-
-  .faq-question-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    line-height: 1.4;
-  }
-
-  .faq-toggle {
+  .faq-icon {
     font-family: 'Inter', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: #737373;
-    line-height: 1;
-    flex-shrink: 0;
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-
-  .faq-row[open] .faq-toggle {
-    transform: rotate(45deg);
+    font-size: 1.25rem;
     color: #069892;
+    transition: transform 0.2s ease;
   }
 
-  .faq-body {
-    padding-bottom: 1.75rem;
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
   }
 
-  .faq-content {
-    padding-left: 2.75rem;
-    max-width: 820px;
+  .faq-answer {
+    padding: 0 1.5rem 1.25rem 1.5rem;
+    border-top: 1px solid #111111;
   }
 
-  .faq-content p {
+  .faq-answer p {
     font-size: 0.875rem;
-    color: #888888;
-    line-height: 1.7;
-    margin: 0;
+    line-height: 1.65;
+    color: #a3a3a3;
+    margin: 1rem 0 0 0;
   }
 
-  /* Responsive Rules */
   @media (max-width: 900px) {
     .header-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .question-wrap {
-      gap: 1rem;
-    }
-
-    .faq-content {
-      padding-left: 2rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .faq-section {
-      padding: 4rem 1.25rem;
-    }
-
-    .faq-summary {
-      padding: 1.25rem 0;
-    }
-
-    .faq-question-text {
-      font-size: 0.9375rem;
-    }
-
-    .faq-content {
-      padding-left: 0;
-      margin-top: 0.5rem;
-    }
-
-    .question-wrap {
-      gap: 0.75rem;
     }
   }
 </style>
