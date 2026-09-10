@@ -17,23 +17,18 @@ const pillars: Pillar[] = [
     id: "02",
     title: "Sala Pesi Assistita",
     subtitle: "Supervisione PT Costante",
-    desc: "Allenati in Sala Pesi con la sicurezza di un Personal Trainer sempre presente in sala a verificare carichi ed esecuzioni. Scheda personalizzata aggiornata ogni 6 settimane.",
+    desc: "Ogni Trainer segue un numero limitato di persone nel rispetto delle singole esigenze, obiettivi, ritmi e carichi di lavoro.",
   },
   {
     id: "03",
-    title: "Mini Class & Monitoraggio",
-    subtitle: "Prenotazione da App & Supporto Continuo",
-    desc: "Accesso controllato tramite applicazione. Monitoriamo la tua costanza di allenamento e il trainer risponde entro 24 ore a ogni tuo dubbio.",
+    title: "Mini Class",
+    subtitle: "I Vantaggi di Allenarsi Insieme",
+    desc: "Utilizzando la forza del gruppo riuscirai a raggiungere i tuoi obiettivi attraverso un metodo sicuro ed efficace.",
   },
 ];
 
 const comparisonData = [
-  {
-    label: "Supervisione in Sala Pesi",
-    standard: "Istruttore assente o condiviso con 30-40 persone",
-    ethos: "Personal Trainer sempre presente e dedicato",
-  },
-  {
+   {
     label: "Colloquio & Anamnesi",
     standard: "Assente o solo registrazione burocratica al desk",
     ethos: "Colloquio iniziale su misura per definire gli obiettivi",
@@ -42,6 +37,11 @@ const comparisonData = [
     label: "Programmazione Tecnica",
     standard: "Schede generiche e standardizzate uguali per tutti",
     ethos: "Scheda sartoriale aggiornata ogni 6 settimane",
+  },
+  {
+    label: "Supervisione in Sala Pesi",
+    standard: "Istruttore assente o condiviso con 30-40 persone",
+    ethos: "Personal Trainer sempre presente e dedicato",
   },
   {
     label: "Monitoraggio Costanza",
@@ -53,30 +53,32 @@ const comparisonData = [
     standard: "Attese ai macchinari e sovraffollamento",
     ethos: "Accesso a numero controllato tramite App",
   },
+  {
+    label: "Allenamento di Gruppo",
+    standard: "Classi affollate e lezioni uguali per tutti",
+    ethos: "Massimo 10 persone con alta personalizzazione e attenzione al singolo",
+  }
 ];
 ---
 
 <section id="metodo" class="trifit-section">
   <div class="container">
     
-    <!-- Meta Bar Superiore -->
     <div class="section-meta">
       <span class="section-number">02 / METODO</span>
       <span class="section-tag">Metodo TriFit & Sala Pesi Assistita</span>
     </div>
 
-    <!-- Header Editoriale -->
     <div class="header-grid">
       <h2 class="section-title">
-        La Sala Pesi con PT.<br />
-        <span class="text-accent">L'efficacia del Metodo.</span>
+        Sala Pesi e Mini Class<br />
+        <span class="text-accent">Sempre con PT.</span>
       </h2>
       <p class="section-lead">
-        Il Metodo TriFit supera l'abbandono tipico delle palestre tradizionali. Uniamo il monitoraggio costante del Personal Trainer in Sala Pesi e nelle Mini Class a una gestione controllata degli accessi.
+        Ogni Trainer segue un numero limitato di persone nel rispetto delle singole esigenze, obiettivi, ritmi e carichi di lavoro.
       </p>
     </div>
 
-    <!-- I 3 Pilastri -->
     <div class="pillars-grid">
       {pillars.map((pillar) => (
         <div class="pillar-block">
@@ -93,7 +95,6 @@ const comparisonData = [
       ))}
     </div>
 
-    <!-- Tabella Comparativa ad Alto Impatto -->
     <div class="comparison-wrapper">
       <div class="comparison-top-bar">
         <div>
@@ -104,7 +105,6 @@ const comparisonData = [
       </div>
 
       <div class="comparison-grid">
-        <!-- Header Colonne -->
         <div class="grid-row grid-header">
           <div class="col-param">Parametro</div>
           <div class="col-standard">Palestra Tradizionale</div>
@@ -114,7 +114,6 @@ const comparisonData = [
           </div>
         </div>
 
-        <!-- Righe Dati -->
         {comparisonData.map((row) => (
           <div class="grid-row">
             <div class="col-param">
@@ -158,7 +157,6 @@ const comparisonData = [
     width: 100%;
   }
 
-  /* Section Meta */
   .section-meta {
     display: flex;
     justify-content: space-between;
@@ -177,7 +175,6 @@ const comparisonData = [
     font-weight: 700;
   }
 
-  /* Header */
   .header-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -208,7 +205,6 @@ const comparisonData = [
     padding-left: 1.25rem;
   }
 
-  /* Pillars */
   .pillars-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -275,7 +271,6 @@ const comparisonData = [
     margin: 0;
   }
 
-  /* Tabella Comparativa */
   .comparison-wrapper {
     background-color: #050505;
     border: 1px solid #1a1a1a;
@@ -334,7 +329,6 @@ const comparisonData = [
     border-bottom: none;
   }
 
-  /* Header Colonne */
   .grid-header {
     background-color: #0c0c0c;
     border-bottom: 1px solid #1a1a1a;
@@ -370,7 +364,6 @@ const comparisonData = [
     letter-spacing: 0.05em;
   }
 
-  /* Celle */
   .col-param {
     padding: 1.25rem 1.5rem;
     font-size: 0.875rem;
@@ -399,7 +392,6 @@ const comparisonData = [
     border-left: 1px solid rgba(6, 152, 146, 0.3);
   }
 
-  /* Icone di Stato */
   .status-icon {
     display: inline-flex;
     align-items: center;
@@ -422,7 +414,6 @@ const comparisonData = [
     font-weight: 700;
   }
 
-  /* Responsive Rules */
   @media (max-width: 900px) {
     .header-grid {
       grid-template-columns: 1fr;

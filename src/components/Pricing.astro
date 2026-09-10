@@ -1,23 +1,16 @@
 ---
 interface Props {
-  promoPrice?: string;
-  fullPrice?: string;
   maxSpots?: number;
   whatsappNumber?: string;
 }
 
 const {
-  promoPrice = "660",
-  fullPrice = "1200",
   maxSpots = 30,
   whatsappNumber = "3773364103",
 } = Astro.props;
 
-const savings = Number(fullPrice) - Number(promoPrice);
-const discountPercent = Math.round((savings / Number(fullPrice)) * 100);
-
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei informazioni sulla promo Founding Member da €660 (anche a rate) e sulla prova di 15-20 giorni di Ethos Training Club."
+  "Ciao! Vorrei maggiori informazioni sulla quota Founding Member con il 50% di sconto riservato e sulla garanzia di 20 giorni di Ethos Training Club."
 )}`;
 
 const schedule = [
@@ -30,22 +23,22 @@ const inclusions = [
   {
     num: "01",
     title: "Colloquio Dedicato con Anamnesi",
-    desc: "Incontro individuale conoscitivo per valutare stato iniziale, esigenze specifiche e obiettivi.",
+    desc: "Incontro individuale conoscitivo per valutare la situazione fisica, le esigenze specifiche e concordare gli obiettivi.",
   },
   {
     num: "02",
     title: "Sala Pesi con PT Costante",
-    desc: "Accesso continuativo con scheda su misura rinnovata ogni 6 settimane e assistenza continua del trainer.",
+    desc: "Accesso continuativo con scheda su misura (aggiornata in caso di frequenza costante) e assistenza continua del trainer.",
   },
   {
     num: "03",
     title: "Corsi Mini Class Metodo TriFit",
-    desc: "Sessioni guidate in piccolo gruppo a numero chiuso per la massima efficacia tecnica.",
+    desc: "Sessioni guidate in piccolo gruppo a numero chiuso per permettere un buon livello di personalizzazione.",
   },
   {
     num: "04",
-    title: "Prenotazione App & Risposta in 24h",
-    desc: "Gestione accessi senza affollamento tramite App e supporto del trainer garantito per qualsiasi dubbio.",
+    title: "Area Funzionale Dedicata & App",
+    desc: "Spazio riservato al condizionamento ibrido, gestione prenotazioni da smartphone per azzerare code e supporto trainer in 24h.",
   },
 ];
 ---
@@ -66,8 +59,8 @@ const inclusions = [
         <span class="text-accent">Accesso Riservato.</span>
       </h2>
       <p class="section-lead">
-        Quota speciale riservata ai primi <strong>{maxSpots} iscritti</strong>. 
-        Tutto compreso per 12 mesi: Sala Pesi con Personal Trainer dedicato, Mini Class TriFit, scheda personalizzata e aggiornamenti periodici, prenotazione tramite App e supporto diretto in 24h.
+        Quota speciale riservata esclusivamente ai primi <strong>{maxSpots} iscritti</strong>. 
+        Tutto compreso per 12 mesi: Sala Pesi con Personal Trainer dedicato, Mini Class TriFit, scheda su misura e supporto continuo.
       </p>
     </div>
 
@@ -78,34 +71,22 @@ const inclusions = [
       <div class="tier-card">
         <div class="tier-header">
           <div class="tier-badge-row">
-            <span class="tier-code">FND-30</span>
-            <span class="tier-saving-badge">RISPARMI €{savings} (-{discountPercent}%)</span>
+            <span class="tier-saving-badge">-50% SCONTO DEDICATO</span>
           </div>
           <h3 class="tier-name">Abbonamento Annuale All-Inclusive</h3>
-          <p class="tier-sub">Sala Pesi assistita + Mini Class TriFit per 12 mesi</p>
+          <p class="tier-sub">Sala Pesi assistita + Corsi Mini Class TriFit per 12 mesi</p>
         </div>
 
-        <!-- Blocco Prezzo -->
-        <div class="tier-price-row">
-          <div class="price-val">
-            <span class="curr">€</span>
-            <span class="amount">{promoPrice}</span>
-            <span class="freq">/anno</span>
-          </div>
-          
-          <div class="price-retail-block">
-            <span class="retail-tag">Prezzo di Listino</span>
-            <span class="retail-amount">€{fullPrice}</span>
+        <!-- Blocco Vantaggio Lancio -->
+        <div class="tier-promo-banner">
+          <div class="promo-highlight">
+            <span class="promo-title">Quota Founding Dimezzata</span>
+            <p class="promo-desc">
+              Accedi alla tariffa annuale più vantaggiosa di sempre, bloccata prima dell'apertura del club. Nessun pagamento online richiesto.
+            </p>
           </div>
         </div>
 
-        <!-- Rateizzazione e Prova -->
-        <div class="installments-box">
-          <div class="inst-item">
-            <span class="inst-label">Rateizzazione Senza Costi Aggiuntivi:</span>
-            <strong class="inst-val">2 rate da €330 &bull; oppure 3 rate da €220</strong>
-          </div>
-        </div>
 
         <!-- Protocollo Incluso -->
         <div class="inclusions-list">
@@ -123,9 +104,9 @@ const inclusions = [
 
         <div class="tier-actions">
           <a href="#preiscrizione" class="btn btn-solid">
-            Blocca la Quota a €{promoPrice}
+            Richiedi Ammissione al 50%
           </a>
-          <span class="limit-caption">Nessun pagamento richiesto online &bull; Al termine dei {maxSpots} posti si passa a €{fullPrice}</span>
+          <span class="limit-caption">Nessuna transazione online &bull; Riservato ai primi {maxSpots} posti</span>
         </div>
       </div>
 
@@ -135,7 +116,6 @@ const inclusions = [
         <!-- Orari -->
         <div class="side-card">
           <div class="card-meta">
-            <span class="card-meta-num">INF-01</span>
             <span class="card-meta-tag">Disponibilità Struttura</span>
           </div>
           <h3 class="side-title">Orari di Apertura</h3>
@@ -156,12 +136,11 @@ const inclusions = [
         <!-- Reception WhatsApp -->
         <div class="side-card side-card-support">
           <div class="card-meta">
-            <span class="card-meta-num">INF-02</span>
             <span class="card-meta-tag">Canale Diretto</span>
           </div>
           <h3 class="side-title">Supporto Reception</h3>
           <p class="side-desc">
-            Vuoi concordare il pagamento in 2 o 3 rate, richiedere dettagli sugli orari o informazioni sulla prova iniziale?
+            Vuoi fissare il colloquio conoscitivo, verificare le opzioni di pagamento o richiedere dettagli sull'apertura?
           </p>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Scrivi al 377 3364103
@@ -271,7 +250,7 @@ const inclusions = [
   .tier-header {
     border-bottom: 1px solid #1a1a1a;
     padding-bottom: 1.5rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .tier-badge-row {
@@ -292,10 +271,10 @@ const inclusions = [
     background-color: #069892;
     color: #000000;
     font-family: 'Michroma', sans-serif;
-    font-size: 0.6875rem;
+    font-size: 0.725rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    padding: 0.3rem 0.65rem;
+    padding: 0.35rem 0.75rem;
     border-radius: 0.2rem;
   }
 
@@ -313,102 +292,61 @@ const inclusions = [
     margin: 0;
   }
 
-  /* Prezzo */
-  .tier-price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #1a1a1a;
+  /* Promo Banner */
+  .tier-promo-banner {
+    background: linear-gradient(135deg, rgba(6, 152, 146, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border: 1px solid rgba(6, 152, 146, 0.3);
+    border-radius: 0.35rem;
+    padding: 1.25rem 1.5rem;
     margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 1rem;
   }
 
-  .price-val {
-    display: flex;
-    align-items: baseline;
-    gap: 0.2rem;
-  }
-
-  .curr {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #069892;
-  }
-
-  .amount {
+  .promo-title {
+    display: block;
     font-family: 'Michroma', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
+    font-size: 1.05rem;
     color: #ffffff;
-  }
-
-  .freq {
-    font-size: 0.875rem;
-    color: #737373;
-    margin-left: 0.2rem;
-  }
-
-  .price-retail-block {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .retail-tag {
-    font-size: 0.6875rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #737373;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.35rem;
   }
 
-  .retail-amount {
-    font-family: 'Michroma', sans-serif;
-    font-size: 1.5rem;
-    color: #666666;
-    text-decoration: line-through;
-    line-height: 1;
-  }
-
-  /* Rateizzazione & Prova */
-  .installments-box {
-    background-color: #0a0a0a;
-    border: 1px solid #141414;
-    border-left: 2px solid #004f5b;
-    border-radius: 0.25rem;
-    padding: 1rem 1.25rem;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .inst-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .promo-desc {
     font-size: 0.8125rem;
-    gap: 1rem;
+    color: #a3a3a3;
+    line-height: 1.5;
+    margin: 0;
   }
 
-  .inst-label {
-    color: #888888;
-    text-transform: uppercase;
-    font-size: 0.6875rem;
-    letter-spacing: 0.05em;
+  /* Garanzia 20 Giorni */
+  .guarantee-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-left: 2px solid #069892;
+    padding: 1rem 1.25rem;
+    border-radius: 0.25rem;
+    margin-bottom: 2rem;
   }
 
-  .inst-val {
+  .guarantee-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-top: 0.1rem;
+  }
+
+  .guarantee-text strong {
+    display: block;
+    font-size: 0.875rem;
     color: #ffffff;
+    margin-bottom: 0.2rem;
   }
 
-  .highlight-inst {
-    border-top: 1px solid #141414;
-    padding-top: 0.5rem;
+  .guarantee-text span {
+    font-size: 0.8125rem;
+    color: #888888;
+    line-height: 1.45;
   }
 
   /* Inclusioni */
@@ -609,20 +547,6 @@ const inclusions = [
   @media (max-width: 600px) {
     .tier-card {
       padding: 1.75rem 1.25rem;
-    }
-
-    .amount {
-      font-size: 2.75rem;
-    }
-
-    .retail-amount {
-      font-size: 1.2rem;
-    }
-
-    .inst-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
     }
   }
 </style>

@@ -1,25 +1,18 @@
 ---
 interface Props {
   whatsappNumber?: string;
-  promoPrice?: string;
-  fullPrice?: string;
   maxSpots?: number;
   backgroundImage?: string;
 }
 
 const {
   whatsappNumber = "3773364103",
-  promoPrice = "660",
-  fullPrice = "1200",
   maxSpots = 30,
   backgroundImage = "/images/gym-preview.jpg",
 } = Astro.props;
 
-const savings = Number(fullPrice) - Number(promoPrice);
-const discountPercent = Math.round((savings / Number(fullPrice)) * 100);
-
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei maggiori informazioni sulla promo Founding Member (€660)."
+  "Ciao! Vorrei maggiori informazioni sulla promo Founding Member con il 50% di sconto e sulla prova di 15-20 giorni di Ethos Training Club."
 )}`;
 ---
 
@@ -64,30 +57,21 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
         <div class="offer-box">
           <div class="offer-header">
             <span class="offer-badge">Founding Member</span>
-            <span class="discount-pill">-{discountPercent}% SCONTO</span>
+            <span class="discount-pill">-50% SCONTO</span>
           </div>
 
-          <div class="price-comparison-block">
-            <div class="price-now">
-              <span class="currency">€</span>
-              <span class="amount">{promoPrice}</span>
-              <span class="unit">/anno</span>
-            </div>
-
-            <div class="price-was">
-              <span class="was-label">Invece di</span>
-              <span class="was-amount">€{fullPrice}</span>
-            </div>
+          <div class="offer-statement">
+            <h2 class="offer-highlight-title">Quota Agevolata di Lancio</h2>
+            <p class="offer-desc">
+              Tariffa speciale dimezzata riservata esclusivamente ai primi <strong>{maxSpots} iscritti</strong> prima dell'apertura ufficiale.
+            </p>
           </div>
 
-          <div class="savings-banner">
-            <span class="savings-icon">✓</span>
-            <span>Risparmi <strong class="text-accent">€{savings}</strong> &bull; Pagabile in 2 o 3 rate</span>
-          </div>
+          
 
           <div class="actions">
             <a href="#preiscrizione" class="btn btn-solid">
-              Blocca la Promo a €{promoPrice}
+              Blocca il Tuo Posto al 50%
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
               Contattaci via WhatsApp
@@ -102,7 +86,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
         <span class="stat-num">01</span>
         <div class="stat-info">
           <strong>Colloquio con Anamnesi</strong>
-          <span>Valutazione dello stato iniziale e dei tuoi obiettivi</span>
+          <span>Valutazione della situazione fisica e dei tuoi obiettivi</span>
         </div>
       </div>
       <div class="stat-col">
@@ -116,7 +100,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
         <span class="stat-num">03</span>
         <div class="stat-info">
           <strong>Continuo Supporto</strong>
-          <span>Allenamento assistito e monitoraggio continuo in sala pesi e nelle Mini Class</span>
+          <span>Allenamento assistito e monitoraggio continuo in sala</span>
         </div>
       </div>
     </div>
@@ -253,37 +237,29 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     background-color: #069892;
     color: #000000;
     font-family: 'Michroma', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.25rem 0.6rem;
+    padding: 0.3rem 0.65rem;
     border-radius: 0.2rem;
   }
-  .price-comparison-block {
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
+  .offer-statement {
+    margin-bottom: 1.5rem;
   }
-  .price-now { display: flex; align-items: baseline; gap: 0.25rem; }
-  .currency { font-size: 1.5rem; font-weight: 700; color: #069892; }
-  .amount {
+  .offer-highlight-title {
     font-family: 'Michroma', sans-serif;
-    font-size: 3.25rem;
-    font-weight: 700;
-    line-height: 1;
+    font-size: 1.25rem;
+    text-transform: uppercase;
     color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.01em;
   }
-  .unit { color: #737373; font-size: 0.9375rem; }
-  .price-was { display: flex; flex-direction: column; justify-content: center; }
-  .was-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: #737373; }
-  .was-amount {
-    font-family: 'Michroma', sans-serif;
-    font-size: 1.4rem;
-    color: #666666;
-    text-decoration: line-through;
-    line-height: 1;
+  .offer-desc {
+    font-size: 0.875rem;
+    color: #a3a3a3;
+    line-height: 1.6;
+    margin: 0;
   }
+  .offer-desc strong { color: #ffffff; }
   .savings-banner {
     display: flex;
     align-items: center;
@@ -292,18 +268,11 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     color: #cccccc;
     background-color: #001a1d;
     border: 1px solid rgba(6, 152, 146, 0.25);
-    padding: 0.65rem 0.85rem;
+    padding: 0.75rem 0.9rem;
     border-radius: 0.25rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
   }
   .savings-icon { color: #069892; font-weight: 700; }
-  .trial-pill {
-    font-size: 0.75rem;
-    color: #a3a3a3;
-    margin-bottom: 1.5rem;
-    padding-left: 0.25rem;
-  }
-  .trial-pill span { color: #069892; font-weight: 600; }
   .actions { display: flex; flex-direction: column; gap: 0.75rem; }
   .btn {
     display: inline-flex;
@@ -342,7 +311,5 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
   @media (max-width: 600px) {
     .meta-bar { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .offer-box { padding: 1.5rem; }
-    .amount { font-size: 2.5rem; }
-    .was-amount { font-size: 1.2rem; }
   }
 </style>

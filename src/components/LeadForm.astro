@@ -2,18 +2,16 @@
 interface Props {
   googleSheetEndpoint?: string;
   whatsappNumber?: string;
-  promoPrice?: string;
   maxSpots?: number;
 }
 
 const {
   googleSheetEndpoint = "https://script.google.com/macros/s/AKfycbyorxkS77dd12sqHZjqW5zXrzf5_Hnbhpmo0MviDm8VdpW0pTHeMEpeybKt-cj22g/exec",
   whatsappNumber = "3773364103",
-  promoPrice = "660",
   maxSpots = 30,
 } = Astro.props;
 
-const whatsappMessage = "Ciao! Vorrei bloccare il mio posto per la promo Founding Member (€" + promoPrice + "/anno) e attivare la prova.";
+const whatsappMessage = "Ciao! Vorrei bloccare il mio posto per la promo Founding Member al 50% di sconto e attivare la prova.";
 const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
 ---
 
@@ -29,9 +27,10 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
       
       <div class="form-aside">
         <h2 class="form-title">
-  Blocca la Tariffa.<br />
-  <span class="text-accent">Accesso a <span class="clean-euro">€</span>{promoPrice}.</span>
-</h2>
+          Blocca la Tariffa.<br />
+          <span class="text-accent">Accesso al 50% di Sconto.</span>
+        </h2>
+
         <p class="form-lead">
           Compila la richiesta per assicurarti una delle quote annuali agevolate riservate ai primi <strong>{maxSpots} clienti</strong>.
         </p>
@@ -55,7 +54,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
             <span class="proc-num">03</span>
             <div class="proc-info">
               <strong>Zero Pagamento Immediato</strong>
-              <span>La tariffa viene bloccata senza transazioni online.</span>
+              <span>La tariffa agevolata viene bloccata senza transazioni online.</span>
             </div>
           </div>
         </div>
@@ -109,7 +108,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
 
           <div class="form-submit-group">
             <button type="submit" id="submit-btn" class="btn btn-solid">
-              <span id="btn-text">Invia Richiesta e Blocca Quota a €{promoPrice}</span>
+              <span id="btn-text">Invia Richiesta al 50% di Sconto</span>
             </button>
             
             <div id="form-feedback" class="feedback-msg" style="display: none;"></div>
@@ -198,13 +197,6 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     margin: 0 auto;
     width: 100%;
   }
-
-  .clean-euro {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-  font-weight: 700;
-  display: inline-block;
-  margin-right: 0.15em;
-}
 
   .section-meta {
     display: flex;

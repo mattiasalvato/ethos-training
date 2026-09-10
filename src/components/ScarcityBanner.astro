@@ -2,15 +2,11 @@
 interface Props {
   totalSpots?: number;
   claimedSpots?: number;
-  promoPrice?: string;
-  fullPrice?: string;
 }
 
 const {
   totalSpots = 30,
   claimedSpots = 22,
-  promoPrice = "660",
-  fullPrice = "1200",
 } = Astro.props;
 
 const remainingSpots = totalSpots - claimedSpots;
@@ -22,12 +18,12 @@ const remainingSpots = totalSpots - claimedSpots;
       <span class="pulse-beacon"></span>
       <span class="scarcity-text">
         FASE PRE-LANCIO: <strong class="text-white">{claimedSpots}/{totalSpots} POSTI ASSEGNATI</strong> &bull; 
-        SOLO <span class="highlight">{remainingSpots} QUOTE FOUNDING</span> RIMASTE A €{promoPrice}
+        SOLO <span class="highlight">{remainingSpots} QUOTE FOUNDING</span> AL -50%
       </span>
     </div>
 
     <div class="scarcity-right">
-      <span class="warning-text">Dopo i 30 posti la quota passa a €{fullPrice}/anno</span>
+      <span class="warning-text">Dopo i {totalSpots} posti lo sconto termina</span>
       <a href="#preiscrizione" class="scarcity-cta">Blocca Quota</a>
     </div>
   </div>
