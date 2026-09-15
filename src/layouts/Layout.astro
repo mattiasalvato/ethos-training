@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title = "Ethos Training Club | Pre-Iscrizioni Founding Member",
-  description = "Boutique Training Club a numero chiuso con metodo TriFit. Blocca la tariffa agevolata Founding Member da 580€ prima dell'esaurimento dei 30 posti disponibili.",
+  description = "Boutique Training Club a numero chiuso a Trissino (VI) con metodo TriFit. Blocca l'ammissione Founding Member con il 50% di sconto riservato prima dell'esaurimento dei posti disponibili.",
 } = Astro.props;
 ---
 
@@ -31,9 +31,77 @@ const {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Michroma&display=swap"
       rel="stylesheet"
     />
+
+    <!-- CookieConsent v3 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.css" />
+
+    <!-- Meta Pixel: bloccato finché l'utente non rilascia il consenso per la categoria marketing -->
+    <script is:inline type="text/plain" data-category="marketing">
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'IL_TUO_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none" 
+           src="https://www.facebook.com/tr?id=IL_TUO_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
   </head>
   <body class="bg-black text-white antialiased">
     <slot />
+
+    <!-- CookieConsent v3 Library & Config -->
+    <script is:inline src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js"></script>
+    <script is:inline>
+      CookieConsent.run({
+        categories: {
+          necessary: {
+            enabled: true,
+            readOnly: true
+          },
+          marketing: {}
+        },
+        language: {
+          default: 'it',
+          translations: {
+            it: {
+              consentModal: {
+                title: 'Preferenze Privacy & Cookie',
+                description: 'Utilizziamo cookie tecnici per consentire la corretta navigazione del sito e cookie di profilazione per misurare l’efficacia delle campagne pubblicitarie.',
+                acceptAllBtn: 'Accetta Tutti',
+                acceptNecessaryBtn: 'Rifiuta',
+                showPreferencesBtn: 'Personalizza',
+                footer: '<a href="/privacy-policy" target="_blank">Informativa Privacy</a>'
+              },
+              preferencesModal: {
+                title: 'Gestione Preferenze',
+                acceptAllBtn: 'Accetta Tutti',
+                acceptNecessaryBtn: 'Rifiuta Tutti',
+                savePreferencesBtn: 'Salva Selezione',
+                sections: [
+                  {
+                    title: 'Cookie Tecnici Strettamente Necessari',
+                    description: 'Questi cookie sono indispensabili per il corretto funzionamento della piattaforma e non possono essere disattivati.',
+                    linkedCategory: 'necessary'
+                  },
+                  {
+                    title: 'Cookie di Marketing & Misurazione (Meta Pixel)',
+                    description: 'Consentono di ottimizzare e analizzare le conversioni delle nostre campagne promozionali.',
+                    linkedCategory: 'marketing'
+                  }
+                ]
+              }
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -72,7 +140,8 @@ const {
     margin-right: 0.12em;
     font-style: normal;
   }
-   *, *::before, *::after {
+
+  *, *::before, *::after {
     box-sizing: border-box;
   }
 
@@ -88,7 +157,6 @@ const {
     background-color: #000000;
     overflow-x: hidden;
   }
-  
 
   /* Barra di scorrimento minimale scura */
   ::-webkit-scrollbar {
@@ -103,5 +171,32 @@ const {
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #069892;
+  }
+
+  /* Personalizzazione Grafica CookieConsent - Tema Ethos */
+  #cc-main {
+    --cc-bg: #080808;
+    --cc-primary-color: #ffffff;
+    --cc-secondary-color: #a3a3a3;
+    --cc-btn-primary-bg: #069892;
+    --cc-btn-primary-color: #000000;
+    --cc-btn-primary-hover-bg: #05807a;
+    --cc-btn-primary-hover-color: #000000;
+    --cc-btn-secondary-bg: #141414;
+    --cc-btn-secondary-color: #ffffff;
+    --cc-btn-secondary-hover-bg: #1f1f1f;
+    --cc-btn-secondary-hover-color: #ffffff;
+    --cc-toggle-bg-on: #069892;
+    --cc-modal-border-radius: 0.35rem;
+    --cc-btn-border-radius: 0.25rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  #cc-main .cm__title,
+  #cc-main .pm__title {
+    font-family: 'Michroma', sans-serif !important;
+    text-transform: uppercase;
+    font-size: 0.95rem !important;
+    letter-spacing: -0.01em;
   }
 </style>

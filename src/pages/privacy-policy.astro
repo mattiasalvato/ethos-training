@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy | Ethos Training Club">
+  <main class="policy-main">
+    <div class="container">
+      
+      <div class="policy-header">
+        <a href="/" class="back-link">&larr; Torna alla Home</a>
+        <span class="policy-tag">Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR)</span>
+        <h1 class="policy-title">Privacy Policy</h1>
+        <p class="policy-updated">Ultimo aggiornamento: Settembre 2026</p>
+      </div>
+
+      <div class="policy-content">
+        <section class="policy-block">
+          <h2>1. Titolare del Trattamento</h2>
+          <p>
+            Il Titolare del trattamento dei dati personali è <strong>Ethos Training Club</strong>, con sede operativa e palestra in fase di allestimento a <strong>Trissino (VI)</strong>.<br />
+            Per qualsiasi chiarimento, richiesta di accesso o cancellazione dei dati è possibile contattare la reception al recapito WhatsApp <strong>+39 377 3364103</strong> o via email all'indirizzo dedicato indicato nei canali ufficiali.
+          </p>
+        </section>
+
+        <section class="policy-block">
+          <h2>2. Tipologia di Dati Raccolti</h2>
+          <p>
+            Attraverso il modulo di pre-iscrizione presente sul sito web, raccogliamo esclusivamente dati personali identificativi forniti volontariamente dall'utente:
+          </p>
+          <ul>
+            <li>Nome e Cognome;</li>
+            <li>Numero di Telefono / contatto WhatsApp;</li>
+            <li>Indirizzo Email;</li>
+            <li>Obiettivo principale di allenamento selezionato.</li>
+          </ul>
+        </section>
+
+        <section class="policy-block">
+          <h2>3. Finalità e Base Giuridica del Trattamento</h2>
+          <p>I dati forniti sono trattati unicamente per le seguenti finalità:</p>
+          <ul>
+            <li><strong>Gestione della richiesta e pre-iscrizione Founding Member:</strong> ricontattare l'utente via telefono o WhatsApp per concordare il colloquio individuale conoscitivo con anamnesi iniziale e finalizzare la tariffa agevolata di lancio (Base giuridica: esecuzione di misure precontrattuali su richiesta dell'interessato - Art. 6, par. 1, lett. b GDPR);</li>
+            <li><strong>Consenso esplicito:</strong> espresso mediante la selezione dell'apposita casella obbligatoria prima dell'invio del modulo (Art. 6, par. 1, lett. a GDPR).</li>
+          </ul>
+          <p>Nessun dato bancario, di pagamento o carta di credito viene raccolto o processato tramite questa piattaforma online.</p>
+        </section>
+
+        <section class="policy-block">
+          <h2>4. Modalità di Trattamento e Piattaforme Terze</h2>
+          <p>
+            Il trattamento viene effettuato mediante strumenti informatici e telematici con misure di sicurezza volte a impedirne l'accesso non autorizzato, la divulgazione o la perdita. I dati inviati tramite form vengono trasmessi tramite protocollo sicuro HTTPS all'infrastruttura di gestione interna (Google Workspace / Google Apps Script) al solo scopo di memorizzare i nominativi per il ricontatto da parte del nostro desk.
+          </p>
+        </section>
+
+        <section class="policy-block">
+          <h2>5. Conservazione dei Dati</h2>
+          <p>
+            I dati personali saranno conservati per il tempo strettamente necessario a gestire la fase di pre-lancio e avvio attività del club, e comunque non oltre i termini ordinari di legge o fino alla revoca del consenso da parte dell'interessato.
+          </p>
+        </section>
+
+        <section class="policy-block">
+          <h2>6. Informativa sui Cookie</h2>
+          <p>
+            Questo sito web utilizza esclusivamente <strong>cookie tecnici</strong> essenziali per la trasmissione delle comunicazioni e la navigazione sicura dell'utente. Non vengono impiegati cookie di profilazione commerciale di terze parti né script di tracciamento invasivi senza preventivo consenso.
+          </p>
+        </section>
+
+        <section class="policy-block">
+          <h2>7. Diritti dell'Interessato</h2>
+          <p>
+            In conformità agli articoli 15-22 del GDPR, l'utente ha diritto in qualsiasi momento di:
+          </p>
+          <ul>
+            <li>Accedere ai propri dati e chiederne copia;</li>
+            <li>Chiedere la rettifica, l'aggiornamento o l'integrazione;</li>
+            <li>Richiedere la cancellazione totale dei propri dati dal nostro archivio contatti;</li>
+            <li>Opporsi o limitare il trattamento in qualsiasi momento.</li>
+          </ul>
+          <p>
+            Le richieste possono essere inviate senza formalità direttamente alla reception tramite il nostro canale WhatsApp al <strong>+39 377 3364103</strong>.
+          </p>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .policy-main {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 5rem 1.5rem 6rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 840px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .policy-header {
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: #069892;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #ffffff;
+  }
+
+  .policy-tag {
+    display: block;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #737373;
+    margin-bottom: 0.75rem;
+  }
+
+  .policy-title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+  }
+
+  .policy-updated {
+    font-size: 0.8125rem;
+    color: #555555;
+    margin: 0;
+  }
+
+  .policy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .policy-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .policy-block h2 {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    color: #069892;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .policy-block p {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: #a3a3a3;
+    margin: 0;
+  }
+
+  .policy-block strong {
+    color: #ffffff;
+  }
+
+  .policy-block ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: #a3a3a3;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .policy-block li::marker {
+    color: #069892;
+  }
+
+  @media (max-width: 600px) {
+    .policy-main {
+      padding: 3.5rem 1.25rem 4rem;
+    }
+
+    .policy-header {
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+</style>
