@@ -56,51 +56,74 @@ const {
   <body class="bg-black text-white antialiased">
     <slot />
 
-    <!-- CookieConsent v3 Library & Config -->
-    <script is:inline src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js"></script>
+    <!-- CookieConsent v3: caricamento e inizializzazione garantita via onload -->
+    <script 
+      is:inline 
+      src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js"
+      onload="initCookieConsent()"
+    ></script>
+
     <script is:inline>
-      CookieConsent.run({
-        categories: {
-          necessary: {
-            enabled: true,
-            readOnly: true
+      function initCookieConsent() {
+        if (typeof CookieConsent === 'undefined') return;
+
+        CookieConsent.run({
+          guiOptions: {
+            consentModal: {
+              layout: 'box',
+              position: 'bottom right',
+              equalWeightButtons: true,
+              flipButtons: false
+            },
+            preferencesModal: {
+              layout: 'box',
+              position: 'right',
+              equalWeightButtons: true,
+              flipButtons: false
+            }
           },
-          marketing: {}
-        },
-        language: {
-          default: 'it',
-          translations: {
-            it: {
-              consentModal: {
-                title: 'Preferenze Privacy & Cookie',
-                description: 'Utilizziamo cookie tecnici per consentire la corretta navigazione del sito e cookie di profilazione per misurare l’efficacia delle campagne pubblicitarie.',
-                acceptAllBtn: 'Accetta Tutti',
-                acceptNecessaryBtn: 'Rifiuta',
-                showPreferencesBtn: 'Personalizza',
-                footer: '<a href="/privacy-policy" target="_blank">Informativa Privacy</a>'
-              },
-              preferencesModal: {
-                title: 'Gestione Preferenze',
-                acceptAllBtn: 'Accetta Tutti',
-                acceptNecessaryBtn: 'Rifiuta Tutti',
-                savePreferencesBtn: 'Salva Selezione',
-                sections: [
-                  {
-                    title: 'Cookie Tecnici Strettamente Necessari',
-                    description: 'Questi cookie sono indispensabili per il corretto funzionamento della piattaforma e non possono essere disattivati.',
-                    linkedCategory: 'necessary'
-                  },
-                  {
-                    title: 'Cookie di Marketing & Misurazione (Meta Pixel)',
-                    description: 'Consentono di ottimizzare e analizzare le conversioni delle nostre campagne promozionali.',
-                    linkedCategory: 'marketing'
-                  }
-                ]
+          categories: {
+            necessary: {
+              enabled: true,
+              readOnly: true
+            },
+            marketing: {}
+          },
+          language: {
+            default: 'it',
+            translations: {
+              it: {
+                consentModal: {
+                  title: 'Preferenze Privacy & Cookie',
+                  description: 'Utilizziamo cookie tecnici per consentire la corretta navigazione del sito e cookie di profilazione per misurare l’efficacia delle campagne pubblicitarie.',
+                  acceptAllBtn: 'Accetta Tutti',
+                  acceptNecessaryBtn: 'Rifiuta',
+                  showPreferencesBtn: 'Personalizza',
+                  footer: '<a href="/privacy-policy" target="_blank">Informativa Privacy</a>'
+                },
+                preferencesModal: {
+                  title: 'Gestione Consensi',
+                  acceptAllBtn: 'Accetta Tutti',
+                  acceptNecessaryBtn: 'Rifiuta Tutti',
+                  savePreferencesBtn: 'Salva Selezione',
+                  sections: [
+                    {
+                      title: 'Cookie Tecnici Necessari',
+                      description: 'Questi cookie sono indispensabili per il corretto funzionamento della piattaforma e non possono essere disattivati.',
+                      linkedCategory: 'necessary'
+                    },
+                    {
+                      title: 'Cookie di Marketing & Misurazione (Meta Pixel)',
+                      description: 'Consentono di ottimizzare e analizzare le conversioni delle nostre campagne promozionali.',
+                      linkedCategory: 'marketing'
+                    }
+                  ]
+                }
               }
             }
           }
-        }
-      });
+        });
+      }
     </script>
   </body>
 </html>
@@ -190,6 +213,7 @@ const {
     --cc-modal-border-radius: 0.35rem;
     --cc-btn-border-radius: 0.25rem;
     font-family: 'Inter', sans-serif;
+    z-index: 99999;
   }
 
   #cc-main .cm__title,
