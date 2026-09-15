@@ -2,12 +2,60 @@
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
-  title = "Ethos Training Club | Pre-Iscrizioni Founding Member",
-  description = "Boutique Training Club a numero chiuso a Trissino (VI) con metodo TriFit. Blocca l'ammissione Founding Member con il 50% di sconto riservato prima dell'esaurimento dei posti disponibili.",
+  title = "Ethos Training Club Trissino | Sala Pesi & Mini Class con PT",
+  description = "Boutique Training Club a Trissino (Vicenza). Allenamento assistito in Sala Pesi e Mini Class a numero chiuso con Personal Trainer dedicato. Scopri il Metodo TriFit.",
+  image = "/images/og-image.jpg",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://www.ethostrainingclub.it");
+const ogImageURL = new URL(image, "https://www.ethostrainingclub.it");
+
+// Schema.org per Local SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  "name": "Ethos Training Club",
+  "image": ogImageURL.toString(),
+  "url": "https://www.ethostrainingclub.it",
+  "telephone": "+393773364103",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Trissino",
+    "addressRegion": "VI",
+    "postalCode": "36070",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 45.567,
+    "longitude": 11.365
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "08:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "09:00",
+      "closes": "13:00"
+    }
+  ],
+  "priceRange": "$$"
+};
 ---
 
 <!doctype html>
@@ -17,12 +65,31 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     
-    <!-- Open Graph / Social Sharing Preview -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <!-- Meta GEO Tag per SEO Locale Trissino / Vicenza -->
+    <meta name="geo.region" content="IT-VI" />
+    <meta name="geo.placename" content="Trissino" />
+    <meta name="geo.position" content="45.567;11.365" />
+    <meta name="ICBM" content="45.567, 11.365" />
+
+    <!-- Open Graph (Facebook / WhatsApp / LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="Ethos Training Club" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Dati Strutturati JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
