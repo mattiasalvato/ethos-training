@@ -11,7 +11,7 @@ const {
   logoSrc = "/images/logo.svg",
   email = "info@ethostrainingclub.it",
   whatsappNumber = "3773364103",
-  address = "Trissino",
+  address = "Trissino (VI)",
   vatNumber = "IT00000000000",
 } = Astro.props;
 
@@ -109,11 +109,9 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
       </div>
 
       <div class="legal-links">
-        <a href="#privacy">Privacy Policy</a>
+        <a href="/privacy-policy">Privacy Policy</a>
         <span class="separator">/</span>
-        <a href="#cookie">Cookie Policy</a>
-        <span class="separator">/</span>
-        <a href="#termini">Termini & Condizioni</a>
+        <a href="#cookie-settings" data-cc="show-preferencesModal">Cookie</a>
       </div>
     </div>
 
@@ -365,10 +363,11 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     color: #555555;
     text-decoration: none;
     transition: color 0.2s ease;
+    cursor: pointer;
   }
 
   .legal-links a:hover {
-    color: #888888;
+    color: #069892;
   }
 
   .separator {

@@ -33,9 +33,9 @@ const {
     />
 
     <!-- CookieConsent v3 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css" />
 
-    <!-- Meta Pixel: bloccato finché l'utente non rilascia il consenso per la categoria marketing -->
+    <!-- Meta Pixel (bloccato preventivamente fino al consenso marketing) -->
     <script is:inline type="text/plain" data-category="marketing">
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -56,73 +56,98 @@ const {
   <body class="bg-black text-white antialiased">
     <slot />
 
-    <!-- CookieConsent v3: caricamento e inizializzazione garantita via onload -->
-    <script 
-      is:inline 
-      src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js"
-      onload="initCookieConsent()"
-    ></script>
+    <!-- Widget Floating per Riaprire le Preferenze Cookie -->
+    <button 
+      type="button" 
+      id="cookie-settings-btn"
+      class="cookie-floating-btn" 
+      data-cc="show-preferencesModal" 
+      aria-label="Gestisci preferenze cookie"
+      title="Preferenze Cookie"
+    >
+      <svg class="cookie-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+        <path d="M8.5 8.5v.01"></path>
+        <path d="M7.5 15.5v.01"></path>
+        <path d="M15.5 14.5v.01"></path>
+        <path d="M11.5 12.5v.01"></path>
+      </svg>
+      <span class="cookie-label">Cookie</span>
+    </button>
 
-    <script is:inline>
-      function initCookieConsent() {
-        if (typeof CookieConsent === 'undefined') return;
+    <!-- CookieConsent v3 via ESM Module -->
+    <script type="module">
+      import * as CookieConsent from 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.esm.js';
 
-        CookieConsent.run({
-          guiOptions: {
-            consentModal: {
-              layout: 'box',
-              position: 'bottom right',
-              equalWeightButtons: true,
-              flipButtons: false
-            },
-            preferencesModal: {
-              layout: 'box',
-              position: 'right',
-              equalWeightButtons: true,
-              flipButtons: false
-            }
+      if (window.location.hash.includes('cookie-reset')) {
+        CookieConsent.reset(true);
+      }
+
+      CookieConsent.run({
+        autoShow: true,
+        guiOptions: {
+          consentModal: {
+            layout: 'box',
+            position: 'bottom right',
+            equalWeightButtons: true,
+            flipButtons: false
           },
-          categories: {
-            necessary: {
-              enabled: true,
-              readOnly: true
-            },
-            marketing: {}
+          preferencesModal: {
+            layout: 'box',
+            position: 'right',
+            equalWeightButtons: true,
+            flipButtons: false
+          }
+        },
+        categories: {
+          necessary: {
+            enabled: true,
+            readOnly: true
           },
-          language: {
-            default: 'it',
-            translations: {
-              it: {
-                consentModal: {
-                  title: 'Preferenze Privacy & Cookie',
-                  description: 'Utilizziamo cookie tecnici per consentire la corretta navigazione del sito e cookie di profilazione per misurare l’efficacia delle campagne pubblicitarie.',
-                  acceptAllBtn: 'Accetta Tutti',
-                  acceptNecessaryBtn: 'Rifiuta',
-                  showPreferencesBtn: 'Personalizza',
-                  footer: '<a href="/privacy-policy" target="_blank">Informativa Privacy</a>'
-                },
-                preferencesModal: {
-                  title: 'Gestione Consensi',
-                  acceptAllBtn: 'Accetta Tutti',
-                  acceptNecessaryBtn: 'Rifiuta Tutti',
-                  savePreferencesBtn: 'Salva Selezione',
-                  sections: [
-                    {
-                      title: 'Cookie Tecnici Necessari',
-                      description: 'Questi cookie sono indispensabili per il corretto funzionamento della piattaforma e non possono essere disattivati.',
-                      linkedCategory: 'necessary'
-                    },
-                    {
-                      title: 'Cookie di Marketing & Misurazione (Meta Pixel)',
-                      description: 'Consentono di ottimizzare e analizzare le conversioni delle nostre campagne promozionali.',
-                      linkedCategory: 'marketing'
-                    }
-                  ]
-                }
+          marketing: {}
+        },
+        language: {
+          default: 'it',
+          translations: {
+            it: {
+              consentModal: {
+                title: 'Preferenze Privacy & Cookie',
+                description: 'Utilizziamo cookie tecnici indispensabili e cookie di tracciamento per misurare l’efficacia delle nostre campagne pubblicitarie.',
+                acceptAllBtn: 'Accetta Tutti',
+                acceptNecessaryBtn: 'Rifiuta',
+                showPreferencesBtn: 'Personalizza',
+                footer: '<a href="/privacy-policy" target="_blank">Informativa Privacy</a>'
+              },
+              preferencesModal: {
+                title: 'Gestione Consensi',
+                acceptAllBtn: 'Accetta Tutti',
+                acceptNecessaryBtn: 'Rifiuta Tutti',
+                savePreferencesBtn: 'Salva Selezione',
+                sections: [
+                  {
+                    title: 'Cookie Tecnici Necessari',
+                    description: 'Questi cookie sono indispensabili per il corretto funzionamento della piattaforma.',
+                    linkedCategory: 'necessary'
+                  },
+                  {
+                    title: 'Marketing & Misurazione (Meta Pixel)',
+                    description: 'Consentono di ottimizzare e analizzare le conversioni delle nostre campagne promozionali.',
+                    linkedCategory: 'marketing'
+                  }
+                ]
               }
             }
           }
-        });
+        }
+      });
+
+      // Gestore click fallback per il pulsante floating
+      document.getElementById('cookie-settings-btn')?.addEventListener('click', () => {
+        CookieConsent.showPreferences();
+      });
+
+      if (window.location.hash.includes('cookie-settings')) {
+        CookieConsent.showPreferences();
       }
     </script>
   </body>
@@ -196,31 +221,109 @@ const {
     background: #069892;
   }
 
-  /* Personalizzazione Grafica CookieConsent - Tema Ethos */
+  /* Widget Floating Cookie */
+  .cookie-floating-btn {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(6, 152, 146, 0.4);
+    color: #a3a3a3;
+    padding: 0.55rem 0.85rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .cookie-floating-btn:hover {
+    background: #06181a;
+    border-color: #069892;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(6, 152, 146, 0.25);
+  }
+
+  .cookie-icon {
+    color: #069892;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .cookie-floating-btn {
+      bottom: 1rem;
+      left: 1rem;
+      padding: 0.5rem;
+    }
+    .cookie-label {
+      display: none;
+    }
+  }
+
+  /* Attivazione Tema Scuro Nativo & Contrasto CookieConsent */
+  :root,
+  .cc--darkmode,
   #cc-main {
-    --cc-bg: #080808;
-    --cc-primary-color: #ffffff;
-    --cc-secondary-color: #a3a3a3;
-    --cc-btn-primary-bg: #069892;
-    --cc-btn-primary-color: #000000;
-    --cc-btn-primary-hover-bg: #05807a;
-    --cc-btn-primary-hover-color: #000000;
-    --cc-btn-secondary-bg: #141414;
-    --cc-btn-secondary-color: #ffffff;
-    --cc-btn-secondary-hover-bg: #1f1f1f;
-    --cc-btn-secondary-hover-color: #ffffff;
-    --cc-toggle-bg-on: #069892;
-    --cc-modal-border-radius: 0.35rem;
-    --cc-btn-border-radius: 0.25rem;
-    font-family: 'Inter', sans-serif;
-    z-index: 99999;
+    --cc-bg: #0d0d0d !important;
+    --cc-primary-color: #ffffff !important;
+    --cc-secondary-color: #b3b3b3 !important;
+    
+    /* Bottoni */
+    --cc-btn-primary-bg: #069892 !important;
+    --cc-btn-primary-color: #000000 !important;
+    --cc-btn-primary-hover-bg: #05807a !important;
+    --cc-btn-primary-hover-color: #000000 !important;
+    
+    --cc-btn-secondary-bg: #1a1a1a !important;
+    --cc-btn-secondary-color: #ffffff !important;
+    --cc-btn-secondary-border: #2a2a2a !important;
+    --cc-btn-secondary-hover-bg: #262626 !important;
+    --cc-btn-secondary-hover-color: #ffffff !important;
+    
+    /* Blocchi Accordion Categorie */
+    --cc-cookie-category-block-bg: #141414 !important;
+    --cc-cookie-category-block-border: #222222 !important;
+    --cc-cookie-category-block-hover-bg: #1c1c1c !important;
+    
+    --cc-separator-border-color: #222222 !important;
+    --cc-toggle-bg-off: #2a2a2a !important;
+    --cc-toggle-bg-on: #069892 !important;
+    --cc-modal-border-radius: 0.35rem !important;
+    --cc-btn-border-radius: 0.25rem !important;
+  }
+
+  #cc-main {
+    font-family: 'Inter', sans-serif !important;
+    z-index: 2147483647 !important;
+  }
+
+  /* Testi categorie nel modale preferenze */
+  #cc-main .section__toggle-wrapper,
+  #cc-main .pm__section-title {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  #cc-main .section__desc,
+  #cc-main .pm__section-desc {
+    color: #a3a3a3 !important;
   }
 
   #cc-main .cm__title,
   #cc-main .pm__title {
     font-family: 'Michroma', sans-serif !important;
-    text-transform: uppercase;
+    text-transform: uppercase !important;
     font-size: 0.95rem !important;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.01em !important;
+    color: #ffffff !important;
   }
 </style>
