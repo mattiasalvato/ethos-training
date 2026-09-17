@@ -170,12 +170,9 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
         mode: 'no-cors',
       });
 
-      feedback.innerHTML = '✓ Richiesta ricevuta. La reception ti contatterà per finalizzare la quota Founding Member.';
-      feedback.className = 'feedback-msg success';
-      feedback.style.display = 'block';
+      // Redirect immediato alla pagina di ringraziamento
+      window.location.href = '/grazie';
 
-      form.reset();
-      if (btnText) btnText.textContent = 'Quota Bloccata con Successo';
     } catch (err) {
       console.error('Errore invio form:', err);
       feedback.innerHTML = 'Si è verificato un errore durante l\'invio. Contattaci direttamente su WhatsApp.';

@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const whatsappNumber = "3773364103";
+const whatsappMessage = "Ciao! Ho appena inviato la richiesta sul sito per la promo Founding Member e vorrei concordare l'anamnesi iniziale.";
+const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<Layout title="Richiesta Ricevuta | Ethos Training Club">
+  <!-- Evento Lead dedicato per chi atterra sulla Thank You Page -->
+  <script is:inline>
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead', {
+        content_name: 'Pre-Iscrizione Founding Member',
+        status: 'completed'
+      });
+    }
+  </script>
+
+  <main class="thank-you-wrapper">
+    <div class="container">
+      <div class="content-box">
+        <span class="badge">07 / ACCESSO CONFERMATO</span>
+        
+        <h1 class="title">
+          Richiesta Registrata.<br />
+          <span class="text-accent">La tua tariffa è bloccata.</span>
+        </h1>
+
+        <p class="description">
+          Abbiamo ricevuto i tuoi dati e riservato la priorità per lo status di <strong>Founding Member (-50%)</strong>.
+        </p>
+
+        <div class="next-steps-card">
+          <h3>Cosa succede adesso?</h3>
+          <ul>
+            <li>
+              <strong>1. Contatto telefonico</strong>
+              <span>La nostra reception ti contatterà a breve per verificare gli orari preferiti e rispondere a tutte le tue domande.</span>
+            </li>
+            <li>
+              <strong>2. Nessun vincolo</strong>
+              <span>La quota resta congelata a tuo nome senza alcun pagamento anticipato online.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="action-card">
+          <p class="action-prompt">Non vuoi attendere la chiamata e preferisci bloccare l'orario adesso?</p>
+          <a href={whatsappDirectUrl} target="_blank" rel="noopener noreferrer" class="btn btn-solid">
+            Scrivi subito su WhatsApp
+          </a>
+          <a href="/" class="back-link">Torna alla Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .thank-you-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 680px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .content-box {
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+    border-radius: 0.35rem;
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #069892;
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-family: 'Michroma', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .text-accent {
+    color: #069892;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #a3a3a3;
+    margin: 0 auto 2.5rem auto;
+  }
+
+  .description strong {
+    color: #ffffff;
+  }
+
+  .next-steps-card {
+    background-color: #0a0a0a;
+    border: 1px solid #171717;
+    border-radius: 0.25rem;
+    padding: 1.75rem;
+    text-align: left;
+    margin-bottom: 2.5rem;
+  }
+
+  .next-steps-card h3 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .next-steps-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .next-steps-card li strong {
+    display: block;
+    font-size: 0.875rem;
+    color: #069892;
+    margin-bottom: 0.2rem;
+  }
+
+  .next-steps-card li span {
+    font-size: 0.8125rem;
+    color: #737373;
+    line-height: 1.45;
+  }
+
+  .action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .action-prompt {
+    font-size: 0.875rem;
+    color: #888888;
+    margin: 0;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .btn-solid {
+    background-color: #069892;
+    color: #000000;
+    border: 1px solid #069892;
+  }
+
+  .btn-solid:hover {
+    background-color: #05807a;
+    border-color: #05807a;
+  }
+
+  .back-link {
+    font-size: 0.75rem;
+    color: #555555;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .back-link:hover {
+    color: #ffffff;
+  }
+
+  @media (max-width: 600px) {
+    .content-box {
+      padding: 2rem 1.25rem;
+    }
+  }
+</style>
