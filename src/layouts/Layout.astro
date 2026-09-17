@@ -11,8 +11,6 @@ const {
   image = "/images/og-image.jpg",
 } = Astro.props;
 
-// Lettura Pixel ID da variabile d'ambiente (.env)
-const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://www.ethostrainingclub.it");
 const ogImageURL = new URL(image, "https://www.ethostrainingclub.it");
@@ -105,27 +103,24 @@ const structuredData = {
     <!-- CookieConsent v3 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css" />
 
-    <!-- Meta Pixel (Caricato solo se la variabile d'ambiente è presente, e attivato solo al consenso marketing) -->
-    {metaPixelId && (
-      <>
-        <script is:inline type="text/plain" data-category="marketing" define:vars={{ metaPixelId }}>
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', metaPixelId);
-          fbq('track', 'PageView');
-        </script>
-        <noscript>
-          <img height="1" width="1" style="display:none" 
-               src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`}/>
-        </noscript>
-      </>
-    )}
+    <!-- Meta Pixel Code (attivato al consenso marketing) -->
+    <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3523455854488770');
+    fbq('track', 'PageView');
+  </script>
+    <noscript>
+      <img height="1" width="1" style="display:none" 
+           src="https://www.facebook.com/tr?id=3523455854488770&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
   </head>
   <body class="bg-black text-white antialiased">
     <slot />

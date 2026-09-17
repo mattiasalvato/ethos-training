@@ -8,14 +8,24 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
 
 <Layout title="Richiesta Ricevuta | Ethos Training Club">
   <!-- Evento Lead dedicato per chi atterra sulla Thank You Page -->
-  <script is:inline>
+ <script is:inline>
+  function fireLeadEvent() {
     if (typeof window.fbq === 'function') {
       window.fbq('track', 'Lead', {
         content_name: 'Pre-Iscrizione Founding Member',
         status: 'completed'
       });
+    } else {
+      setTimeout(fireLeadEvent, 200);
     }
-  </script>
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    fireLeadEvent();
+  } else {
+    document.addEventListener('DOMContentLoaded', fireLeadEvent);
+  }
+</script>
 
   <main class="thank-you-wrapper">
     <div class="container">
