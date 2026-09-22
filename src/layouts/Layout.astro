@@ -87,13 +87,13 @@ const structuredData = {
     <meta property="og:site_name" content="Ethos Training Club" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3MKKGCYHQ"></script>
-    <script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-P3MKKGCYHQ"></script>
+    <script is:inline define:vars={{ gaId: 'G-P3MKKGCYHQ' }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-P3MKKGCYHQ');
+      gtag('config', gaId);
     </script>
 
     <!-- Twitter Card -->
