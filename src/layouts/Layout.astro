@@ -86,6 +86,16 @@ const structuredData = {
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:site_name" content="Ethos Training Club" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3MKKGCYHQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-P3MKKGCYHQ');
+    </script>
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
