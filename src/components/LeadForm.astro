@@ -11,7 +11,7 @@ const {
   maxSpots = 30,
 } = Astro.props;
 
-const whatsappMessage = "Ciao! Vorrei bloccare il mio posto per la promo Founding Member al 50% di sconto e attivare la prova.";
+const whatsappMessage = "Ciao! Vorrei bloccare il mio posto per la promo Founding Member al 50% di sconto ed essere inserito tra i primi 30.";
 const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
 ---
 
@@ -20,50 +20,50 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     
     <div class="section-meta">
       <span class="section-number">06 / REGISTRAZIONE</span>
-      <span class="section-tag">Pre-Iscrizione Founding Member</span>
+      <span class="section-tag">Programma Founding Member • Solo {maxSpots} Posti</span>
     </div>
 
     <div class="form-grid">
       
       <div class="form-aside">
         <h2 class="form-title">
-          Blocca la Tariffa.<br />
-          <span class="text-accent">Accesso al 50% di Sconto.</span>
+          Blocca il Posto.<br />
+          <span class="text-accent">Quota Lancio al -50%.</span>
         </h2>
 
         <p class="form-lead">
-          Compila la richiesta per assicurarti una delle quote annuali agevolate riservate ai primi <strong>{maxSpots} clienti</strong>.
+          Garantisci il tuo accesso a numero chiuso con <strong>1 Personal Trainer ogni massimo 10 persone</strong>. Condizioni dedicate riservate ai primi <strong>{maxSpots} iscritti</strong> prima dell'apertura.
         </p>
 
         <div class="procedure-list">
           <div class="proc-item">
             <span class="proc-num">01</span>
             <div class="proc-info">
-              <strong>Invio Modulo</strong>
-              <span>Registra i tuoi dati anagrafici e l'obiettivo.</span>
+              <strong>Richiesta Posto</strong>
+              <span>Compila il form per verificare la disponibilità delle quote -50%.</span>
             </div>
           </div>
           <div class="proc-item">
             <span class="proc-num">02</span>
             <div class="proc-info">
-              <strong>Contatto Reception</strong>
-              <span>Fissiamo il colloquio dedicato con anamnesi iniziale.</span>
+              <strong>Contatto Diretto</strong>
+              <span>Ti ricontattiamo via WhatsApp per concordare orari e obiettivi.</span>
             </div>
           </div>
           <div class="proc-item">
             <span class="proc-num">03</span>
             <div class="proc-info">
-              <strong>Zero Pagamento Immediato</strong>
-              <span>La tariffa agevolata viene bloccata senza transazioni online.</span>
+              <strong>Nessun Pagamento Online</strong>
+              <span>La tariffa agevolata viene bloccata subito senza anticipi digitali.</span>
             </div>
           </div>
         </div>
 
         <div class="direct-support-box">
           <span class="support-tag">Canale Diretto</span>
-          <p class="support-text">Preferisci procedere direttamente senza inviare il modulo?</p>
+          <p class="support-text">Hai dubbi o preferisci fare richiesta direttamente al coach?</p>
           <a href={whatsappDirectUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-            Scrivi alla Reception su WhatsApp
+            Scrivi al Team su WhatsApp
           </a>
         </div>
       </div>
@@ -74,14 +74,20 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
           class="editorial-form"
           data-endpoint={googleSheetEndpoint}
         >
+          <!-- Hidden inputs per catturare UTM e provenienza -->
+          <input type="hidden" name="utm_source" id="utm_source" value="" />
+          <input type="hidden" name="utm_medium" id="utm_medium" value="" />
+          <input type="hidden" name="utm_campaign" id="utm_campaign" value="" />
+          <input type="hidden" name="utm_content" id="utm_content" value="" />
+
           <div class="input-row">
             <div class="input-field">
               <label for="nome">Nome *</label>
-              <input type="text" id="nome" name="Nome" required placeholder="Nome" autocomplete="given-name" />
+              <input type="text" id="nome" name="Nome" required placeholder="Mario" autocomplete="given-name" />
             </div>
             <div class="input-field">
               <label for="cognome">Cognome *</label>
-              <input type="text" id="cognome" name="Cognome" required placeholder="Cognome" autocomplete="family-name" />
+              <input type="text" id="cognome" name="Cognome" required placeholder="Rossi" autocomplete="family-name" />
             </div>
           </div>
 
@@ -92,16 +98,16 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
             </div>
             <div class="input-field">
               <label for="email">Indirizzo Email *</label>
-              <input type="email" id="email" name="Email" required placeholder="nome@email.it" autocomplete="email" />
+              <input type="email" id="email" name="Email" required placeholder="mario.rossi@email.it" autocomplete="email" />
             </div>
           </div>
 
           <div class="input-field">
-            <label for="obiettivo">Obiettivo Principale</label>
+            <label for="obiettivo">Cosa cerchi principalmente?</label>
             <select id="obiettivo" name="Obiettivo">
-              <option value="Ricominciare ad allenarmi con costanza">Ricominciare ad allenarmi con costanza</option>
+              <option value="Essere seguito passo dopo passo da un coach">Essere seguito con costanza da un Personal Trainer</option>
               <option value="Tonificazione e ricomposizione corporea">Tonificazione e ricomposizione corporea</option>
-              <option value="Miglioramento postura e mobilità funzionale">Miglioramento postura e mobilità funzionale</option>
+              <option value="Spazi dedicati e zero attese sugli attrezzi">Allenarmi senza attese e senza caos</option>
               <option value="Potenziamento e performance atletica">Potenziamento e performance atletica</option>
             </select>
           </div>
@@ -118,13 +124,13 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
 
           <div class="form-submit-group">
             <button type="submit" id="submit-btn" class="btn btn-solid">
-              <span id="btn-text">Invia Richiesta al 50% di Sconto</span>
+              <span id="btn-text">Blocca il Tuo Posto al -50%</span>
             </button>
             
             <div id="form-feedback" class="feedback-msg" style="display: none;"></div>
 
             <span class="privacy-notice">
-              I dati forniti saranno utilizzati esclusivamente per definire la pre-iscrizione nel rispetto del GDPR.
+              Riceverai un messaggio WhatsApp per confermare il posto. Nessun addebito automatico.
             </span>
           </div>
         </form>
@@ -147,18 +153,29 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     const endpointUrl = form.dataset.endpoint;
 
     if (!endpointUrl || endpointUrl.includes('INSERISCI_QUI')) {
-      feedback.textContent = 'Errore di configurazione: inserisci l\'URL della Web App di Google Apps Script.';
+      feedback.textContent = "Errore di configurazione: URL Apps Script mancante.";
       feedback.className = 'feedback-msg error';
       feedback.style.display = 'block';
       return;
     }
 
     btn.disabled = true;
-    if (btnText) btnText.textContent = 'Registrazione in corso...';
+    if (btnText) btnText.textContent = 'Verifica disponibilità in corso...';
     feedback.style.display = 'none';
 
+    // 1. Estrazione dati dal form
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
+
+    // 2. Lettura SICURA dei parametri URL al momento dell'invio
+    const urlParams = new URLSearchParams(window.location.search);
+    payload.utm_source = urlParams.get('utm_source') || '';
+    payload.utm_medium = urlParams.get('utm_medium') || '';
+    payload.utm_campaign = urlParams.get('utm_campaign') || '';
+    payload.utm_content = urlParams.get('utm_content') || '';
+
+    // Log in console per debug (premi F12 per verificare cosa sta partendo)
+    console.log("Dati inviati:", payload);
 
     try {
       await fetch(endpointUrl, {
@@ -175,7 +192,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
 
     } catch (err) {
       console.error('Errore invio form:', err);
-      feedback.innerHTML = 'Si è verificato un errore durante l\'invio. Contattaci direttamente su WhatsApp.';
+      feedback.innerHTML = "Si è verificato un errore durante l'invio. Contattaci su WhatsApp.";
       feedback.className = 'feedback-msg error';
       feedback.style.display = 'block';
       
@@ -248,7 +265,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     line-height: 1.7;
     color: #a3a3a3;
     margin: 0 0 2.5rem 0;
-    border-left: 2px solid #004f5b;
+    border-left: 2px solid #069892;
     padding-left: 1.25rem;
   }
 
@@ -302,7 +319,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #004f5b;
+    color: #069892;
     display: block;
     margin-bottom: 0.35rem;
   }
@@ -379,7 +396,6 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     color: #ffffff;
   }
 
-  /* Checkbox Privacy */
   .checkbox-field {
     display: flex;
     align-items: flex-start;

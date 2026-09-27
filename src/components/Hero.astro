@@ -12,7 +12,7 @@ const {
 } = Astro.props;
 
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei maggiori informazioni sulla promo Founding Member con il 50% di sconto e sulla prova di 15-20 giorni di Ethos Training Club."
+  "Ciao! Vorrei maggiori informazioni sulla promo Founding Member con il 50% di sconto e sul programma di Ethos Training Club."
 )}`;
 ---
 
@@ -25,56 +25,54 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     <div class="meta-bar">
       <div class="meta-label">
         <span class="dot-live"></span>
-        <span>Apertura & Pre-Iscrizioni</span>
+        <span>Nuova Apertura • Trissino (VI)</span>
       </div>
       <div class="scarcity-counter">
-        <span>Fase Lancio:</span>
-        <strong>Primi {maxSpots} Ingressi</strong>
+        <span>Programma Founding Member:</span>
+        <strong>Solo {maxSpots} Posti</strong>
       </div>
     </div>
 
     <div class="hero-grid">
       <div class="hero-main">
         <h1 class="headline">
-          Il Training Club <br />
-          <span class="text-accent">che mancava.</span>
+          1 Personal Trainer <br />
+          <span class="text-accent">ogni 10 persone.</span>
         </h1>
 
         <div class="usp-row">
-          <span class="tag">Metodo TriFit</span>
+          <span class="tag">Solo su Prenotazione</span>
           <span class="divider">/</span>
-          <span class="tag">Mini Class Dedicate</span>
+          <span class="tag">Zero Attese</span>
           <span class="divider">/</span>
-          <span class="tag">Sala Pesi Assistita</span>
+          <span class="tag">Miniclass Guidate</span>
         </div>
       </div>
 
       <div class="hero-aside">
         <p class="manifesto">
-          Uno spazio che unisce la disciplina della Sala Pesi seguita costantemente dal Personal Trainer all'energia delle Mini Class a numero chiuso.
+          Uno spazio a Trissino dove non ti alleni mai abbandonato a te stesso: accessi gestiti su prenotazione e la garanzia costante di <strong>1 Personal Trainer ogni massimo 10 persone</strong> in sala.
         </p>
 
         <div class="offer-box">
           <div class="offer-header">
             <span class="offer-badge">Founding Member</span>
-            <span class="discount-pill">-50% SCONTO</span>
+            <span class="discount-pill">-50% QUOTA LANCIO</span>
           </div>
 
           <div class="offer-statement">
-            <h2 class="offer-highlight-title">Quota Agevolata di Lancio</h2>
+            <h2 class="offer-highlight-title">Accesso Esclusivo in Anteprima</h2>
             <p class="offer-desc">
-              Tariffa speciale dimezzata riservata esclusivamente ai primi <strong>{maxSpots} iscritti</strong> prima dell'apertura ufficiale.
+              Tariffa dimezzata riservata solo ai primi <strong>{maxSpots} iscritti</strong> prima del taglio del nastro ufficiale.
             </p>
           </div>
 
-          
-
           <div class="actions">
             <a href="#preiscrizione" class="btn btn-solid">
-              Blocca il Tuo Posto al 50%
+              Blocca il Tuo Posto al -50%
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              Contattaci via WhatsApp
+              Richiedi Info su WhatsApp
             </a>
           </div>
         </div>
@@ -85,22 +83,22 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
       <div class="stat-col">
         <span class="stat-num">01</span>
         <div class="stat-info">
-          <strong>Colloquio con Anamnesi</strong>
-          <span>Valutazione della situazione fisica e dei tuoi obiettivi</span>
+          <strong>Rapporto 1 a 10</strong>
+          <span>Un trainer dedicato ogni max 10 persone per seguirti davvero</span>
         </div>
       </div>
       <div class="stat-col">
         <span class="stat-num">02</span>
         <div class="stat-info">
-          <strong>Schede ogni 6 Settimane</strong>
-          <span>Progressione sartoriale su misura</span>
+          <strong>Trainer Dedicato</strong>
+          <span>Correzione dell'esecuzione e supporto costante in sala</span>
         </div>
       </div>
       <div class="stat-col">
         <span class="stat-num">03</span>
         <div class="stat-info">
-          <strong>Continuo Supporto</strong>
-          <span>Allenamento assistito e monitoraggio continuo in sala</span>
+          <strong>Percorso Su Misura</strong>
+          <span>Progressione reale adattata ai tuoi obiettivi fisici</span>
         </div>
       </div>
     </div>
@@ -175,7 +173,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     border-radius: 50%;
   }
   .scarcity-counter { color: #737373; }
-  .scarcity-counter strong { color: #ffffff; margin-left: 0.25rem; }
+  .scarcity-counter strong { color: #069892; margin-left: 0.25rem; }
   .hero-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -208,7 +206,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     line-height: 1.7;
     color: #cccccc;
     margin: 0 0 2.5rem 0;
-    border-left: 2px solid #004f5b;
+    border-left: 2px solid #069892;
     padding-left: 1.25rem;
   }
   .manifesto strong { color: #ffffff; }
@@ -247,7 +245,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
   }
   .offer-highlight-title {
     font-family: 'Michroma', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     text-transform: uppercase;
     color: #ffffff;
     margin: 0 0 0.5rem 0;
@@ -260,19 +258,6 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     margin: 0;
   }
   .offer-desc strong { color: #ffffff; }
-  .savings-banner {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    color: #cccccc;
-    background-color: #001a1d;
-    border: 1px solid rgba(6, 152, 146, 0.25);
-    padding: 0.75rem 0.9rem;
-    border-radius: 0.25rem;
-    margin-bottom: 1.5rem;
-  }
-  .savings-icon { color: #069892; font-weight: 700; }
   .actions { display: flex; flex-direction: column; gap: 0.75rem; }
   .btn {
     display: inline-flex;
@@ -300,7 +285,7 @@ const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent
     padding-top: 2.5rem;
   }
   .stat-col { display: flex; align-items: baseline; gap: 1rem; }
-  .stat-num { font-family: 'Michroma', sans-serif; font-size: 1.25rem; color: #004f5b; }
+  .stat-num { font-family: 'Michroma', sans-serif; font-size: 1.25rem; color: #069892; }
   .stat-info { display: flex; flex-direction: column; gap: 0.25rem; }
   .stat-info strong { font-size: 0.9375rem; color: #ffffff; }
   .stat-info span { font-size: 0.8125rem; color: #737373; line-height: 1.4; }
