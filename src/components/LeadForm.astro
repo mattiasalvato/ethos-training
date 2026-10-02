@@ -11,57 +11,59 @@ const {
   maxSpots = 30,
 } = Astro.props;
 
-const whatsappMessage = "Ciao! Vorrei bloccare il mio posto per la promo Founding Member al 50% di sconto ed essere inserito tra i primi 30.";
+const whatsappMessage = "Ciao! Vorrei bloccare la mia tessera Foundation Member al 35% di sconto prima dell'apertura del 10 Ottobre.";
 const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
 ---
 
 <section id="preiscrizione" class="lead-section">
   <div class="container">
     
-    <div class="section-meta">
-      <span class="section-number">06 / REGISTRAZIONE</span>
-      <span class="section-tag">Programma Founding Member • Solo {maxSpots} Posti</span>
-    </div>
+   
 
     <div class="form-grid">
       
       <div class="form-aside">
+        <div class="soldout-callout">
+          <span class="soldout-dot"></span>
+          <span>1ª TRANCHE SOLD OUT (30/30)</span>
+        </div>
+
         <h2 class="form-title">
-          Blocca il Posto.<br />
-          <span class="text-accent">Quota Lancio al -50%.</span>
+          Blocca la Tessera.<br />
+          <span class="text-accent">Quota Lancio al -35%.</span>
         </h2>
 
         <p class="form-lead">
-          Garantisci il tuo accesso a numero chiuso con <strong>1 Personal Trainer ogni massimo 10 persone</strong>. Condizioni dedicate riservate ai primi <strong>{maxSpots} iscritti</strong> prima dell'apertura.
+          I primi 30 posti in prevendita sono andati esauriti. Sblocchiamo le <strong>ultime {maxSpots} tessere agevolate</strong> prima dell'apertura del <strong>10 Ottobre</strong>. Valide fino al <strong>9 Ottobre ore 23:59</strong>.
         </p>
 
         <div class="procedure-list">
           <div class="proc-item">
             <span class="proc-num">01</span>
             <div class="proc-info">
-              <strong>Richiesta Posto</strong>
-              <span>Compila il form per verificare la disponibilità delle quote -50%.</span>
+              <strong>Richiesta Posto Riservato</strong>
+              <span>Compila il modulo per verificare la disponibilità delle ultime quote -35%.</span>
             </div>
           </div>
           <div class="proc-item">
             <span class="proc-num">02</span>
             <div class="proc-info">
               <strong>Contatto Diretto</strong>
-              <span>Ti ricontattiamo via WhatsApp per concordare orari e obiettivi.</span>
+              <span>Ti ricontattiamo via WhatsApp per confermare orari e dettagli della sessione.</span>
             </div>
           </div>
           <div class="proc-item">
             <span class="proc-num">03</span>
             <div class="proc-info">
-              <strong>Nessun Pagamento Online</strong>
-              <span>La tariffa agevolata viene bloccata subito senza anticipi digitali.</span>
+              <strong>Zero Pagamenti Online</strong>
+              <span>Blocchi subito la tariffa agevolata senza anticipare denaro online.</span>
             </div>
           </div>
         </div>
 
         <div class="direct-support-box">
           <span class="support-tag">Canale Diretto</span>
-          <p class="support-text">Hai dubbi o preferisci fare richiesta direttamente al coach?</p>
+          <p class="support-text">Hai dubbi o preferisci fare richiesta direttamente su WhatsApp?</p>
           <a href={whatsappDirectUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Scrivi al Team su WhatsApp
           </a>
@@ -124,14 +126,12 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
 
           <div class="form-submit-group">
             <button type="submit" id="submit-btn" class="btn btn-solid">
-              <span id="btn-text">Blocca il Tuo Posto al -50%</span>
+              <span id="btn-text">Blocca la Tua Tessera al -35%</span>
             </button>
             
             <div id="form-feedback" class="feedback-msg" style="display: none;"></div>
 
-            <span class="privacy-notice">
-              Riceverai un messaggio WhatsApp per confermare il posto. Nessun addebito automatico.
-            </span>
+            
           </div>
         </form>
       </div>
@@ -174,7 +174,6 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     payload.utm_campaign = urlParams.get('utm_campaign') || '';
     payload.utm_content = urlParams.get('utm_content') || '';
 
-    // Log in console per debug (premi F12 per verificare cosa sta partendo)
     console.log("Dati inviati:", payload);
 
     try {
@@ -245,6 +244,28 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     grid-template-columns: 1fr 1.2fr;
     gap: 4rem;
     align-items: start;
+  }
+
+  .soldout-callout {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.3rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #e5e5e5;
+    margin-bottom: 1.25rem;
+  }
+
+  .soldout-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #069892;
+    border-radius: 50%;
   }
 
   .form-title {
@@ -474,12 +495,12 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
     justify-content: center;
     padding: 0.95rem 1.25rem;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     text-decoration: none;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     width: 100%;
     text-align: center;
@@ -499,6 +520,7 @@ const whatsappDirectUrl = "https://wa.me/39" + whatsappNumber + "?text=" + encod
   .btn-solid:hover:not(:disabled) {
     background-color: #05807a;
     border-color: #05807a;
+    box-shadow: 0 0 15px rgba(6, 152, 146, 0.4);
   }
 
   .btn-outline {

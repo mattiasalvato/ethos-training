@@ -1,19 +1,17 @@
 ---
 interface Props {
-  maxSpots?: number;
   logoSrc?: string;
 }
 
 const { 
-  maxSpots = 30,
-  logoSrc = "images/logo.png" // Sostituisci questo percorso con il tuo file logo
+  logoSrc = "/images/logo.png"
 } = Astro.props;
 ---
 
 <header class="navbar-sticky">
   <div class="nav-container">
     
-    <!-- Brand Logo con Immagine -->
+    <!-- Brand Logo -->
     <a href="#" class="brand-link" aria-label="Ethos Training Club Home">
       <img 
         src={logoSrc} 
@@ -24,11 +22,11 @@ const {
       />
     </a>
 
-    <!-- Nav Links & Live Status -->
+    <!-- Nav Right: Pill + CTA rapida -->
     <div class="nav-right">
-      <div class="scarcity-pill">
+      <div class="status-pill">
         <span class="pulse-dot"></span>
-        <span class="pill-text">Founding Member: <strong>Primi {maxSpots}</strong></span>
+        <span class="pill-text">Ultime 30 Tessere <strong>-35%</strong></span>
       </div>
 
       <a href="#preiscrizione" class="btn-nav">
@@ -50,9 +48,9 @@ const {
     left: 0;
     right: 0;
     z-index: 50;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.88);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 0.85rem 1.5rem;
     font-family: 'Inter', sans-serif;
   }
@@ -72,9 +70,9 @@ const {
   }
 
   .brand-logo {
-    height: 36px;
+    height: 34px;
     width: auto;
-    max-width: 180px;
+    max-width: 170px;
     object-fit: contain;
     display: block;
   }
@@ -85,14 +83,14 @@ const {
     gap: 1.25rem;
   }
 
-  .scarcity-pill {
+  .status-pill {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.35rem 0.75rem;
-    background-color: #080808;
-    border: 1px solid #1f1f1f;
-    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(6, 152, 146, 0.3);
+    border-radius: 999px;
   }
 
   .pulse-dot {
@@ -100,24 +98,26 @@ const {
     height: 6px;
     background-color: #069892;
     border-radius: 50%;
+    box-shadow: 0 0 6px #069892;
   }
 
   .pill-text {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: #a3a3a3;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
   }
 
   .pill-text strong {
-    color: #ffffff;
+    color: #069892;
+    font-weight: 700;
   }
 
   .btn-nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.55rem 1rem;
+    padding: 0.55rem 1.15rem;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -126,11 +126,12 @@ const {
     background-color: #069892;
     color: #000000;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease;
   }
 
   .btn-nav:hover {
     background-color: #05807a;
+    transform: translateY(-1px);
   }
 
   @media (max-width: 640px) {
@@ -142,7 +143,7 @@ const {
       height: 28px;
     }
 
-    .scarcity-pill {
+    .status-pill {
       display: none;
     }
   }

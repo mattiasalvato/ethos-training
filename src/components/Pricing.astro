@@ -10,7 +10,7 @@ const {
 } = Astro.props;
 
 const whatsappUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(
-  "Ciao! Vorrei maggiori informazioni sulla quota Founding Member con il 50% di sconto riservato e sulla garanzia di 20 giorni di Ethos Training Club."
+  "Ciao! Vorrei maggiori informazioni sulle ultime tessere Foundation Member con il 35% di sconto prima dell'apertura del 10 Ottobre."
 )}`;
 
 const schedule = [
@@ -22,23 +22,23 @@ const schedule = [
 const inclusions = [
   {
     num: "01",
-    title: "Colloquio Dedicato con Anamnesi",
-    desc: "Incontro individuale conoscitivo per valutare la situazione fisica, le esigenze specifiche e concordare gli obiettivi.",
+    title: "Valutazione Funzionale & Anamnesi",
+    desc: "Test preliminare di mobilità e biomeccanica per individuare asimmetrie e definire gli obiettivi reali.",
   },
   {
     num: "02",
-    title: "Sala Pesi con PT Costante",
-    desc: "Accesso continuativo con scheda su misura (aggiornata in caso di frequenza costante) e assistenza continua del trainer.",
+    title: "Sala con PT Costante (Rapporto 1:10)",
+    desc: "Un coach sempre presente in sala a guidarti e correggere ogni singola ripetizione.",
   },
   {
     num: "03",
-    title: "Corsi Mini Class Metodo TriFit",
-    desc: "Sessioni guidate in piccolo gruppo a numero chiuso per permettere un buon livello di personalizzazione.",
+    title: "Sessioni Guidate & Metodo TriFit",
+    desc: "Allenamento a piccoli gruppi contingentati per garantire spazio, progressione e massima attenzione.",
   },
   {
     num: "04",
-    title: "Area Funzionale Dedicata & App",
-    desc: "Spazio riservato all’allenamento in mini gruppo, gestione prenotazioni da smartphone per azzerare code e canale di assistenza con messaggistica sempre attivo",
+    title: "Accesso su Prenotazione da App",
+    desc: "Blocchi il tuo orario da smartphone: postazione sempre riservata, zero code e zero attese agli attrezzi.",
   },
 ];
 ---
@@ -46,21 +46,16 @@ const inclusions = [
 <section id="offerta" class="pricing-section">
   <div class="container">
     
-    <!-- Meta Bar Superiore -->
-    <div class="section-meta">
-      <span class="section-number">04 / QUOTE</span>
-      <span class="section-tag">Ammissione Founding Member</span>
-    </div>
-
+   
     <!-- Header Editoriale -->
     <div class="header-grid">
       <h2 class="section-title">
         Tariffa di Lancio.<br />
-        <span class="text-accent">Accesso Riservato.</span>
+        <span class="text-accent">Ultime 30 Tessere.</span>
       </h2>
       <p class="section-lead">
-        Quota speciale riservata esclusivamente ai primi <strong>{maxSpots} iscritti</strong>. 
-        Tutto compreso per 12 mesi: Sala Pesi con Personal Trainer dedicato, Mini Class TriFit, scheda su misura e supporto continuo.
+        I primi 30 posti sono andati esauriti in prevendita. 
+        Sblocchiamo le ultime <strong>{maxSpots} quote al -35%</strong> valide fino al <strong>9 Ottobre</strong> prima dell'apertura del 10 Ottobre.
       </p>
     </div>
 
@@ -71,26 +66,26 @@ const inclusions = [
       <div class="tier-card">
         <div class="tier-header">
           <div class="tier-badge-row">
-            <span class="tier-saving-badge">-50% SCONTO DEDICATO</span>
+            <span class="soldout-badge">1ª TRANCHE SOLD OUT</span>
+            <span class="tier-saving-badge">-35% QUOTA LANCIO</span>
           </div>
-          <h3 class="tier-name">Abbonamento Annuale All-Inclusive</h3>
-          <p class="tier-sub">Sala Pesi assistita + Corsi Mini Class TriFit per 12 mesi</p>
+          <h3 class="tier-name">Abbonamento All-Inclusive</h3>
+          <p class="tier-sub">Sala assistita (1:10) + Sessioni guidate su prenotazione</p>
         </div>
 
         <!-- Blocco Vantaggio Lancio -->
         <div class="tier-promo-banner">
           <div class="promo-highlight">
-            <span class="promo-title">Quota Founding Dimezzata</span>
+            <span class="promo-title">Blocco Quota Agevolata</span>
             <p class="promo-desc">
-              Accedi alla tariffa annuale più vantaggiosa di sempre, bloccata prima dell'apertura del club. Nessun pagamento online richiesto.
+              Accedi alla tariffa agevolata della seconda tranche. Valida esclusivamente fino al 9 Ottobre ore 23:59. Nessun pagamento online richiesto.
             </p>
           </div>
         </div>
 
-
         <!-- Protocollo Incluso -->
         <div class="inclusions-list">
-          <span class="list-heading">Incluso nella Quota Founding:</span>
+          <span class="list-heading">Cosa include l'esperienza Ethos:</span>
           {inclusions.map((item) => (
             <div class="inc-row">
               <span class="inc-num">{item.num}</span>
@@ -104,13 +99,13 @@ const inclusions = [
 
         <div class="tier-actions">
           <a href="#preiscrizione" class="btn btn-solid">
-            Richiedi Ammissione al 50%
+            Richiedi Ammissione al -35%
           </a>
-          <span class="limit-caption">Nessuna transazione online &bull; Riservato ai primi {maxSpots} posti</span>
+          <span class="limit-caption">Nessun pagamento anticipato &bull; Ultime {maxSpots} tessere fino al 9/10</span>
         </div>
       </div>
 
-      <!-- Colonna Laterale: Orari & Reception -->
+      <!-- Colonna Laterale: Orari & Supporto -->
       <div class="side-column">
         
         <!-- Orari -->
@@ -133,14 +128,14 @@ const inclusions = [
           </div>
         </div>
 
-        <!-- Reception WhatsApp -->
+        <!-- Supporto WhatsApp -->
         <div class="side-card side-card-support">
           <div class="card-meta">
             <span class="card-meta-tag">Canale Diretto</span>
           </div>
           <h3 class="side-title">Supporto Reception</h3>
           <p class="side-desc">
-            Vuoi fissare il colloquio conoscitivo, verificare le opzioni di pagamento o richiedere dettagli sull'apertura?
+            Hai domande sul metodo, vuoi verificare le fasce orarie disponibili o fissare la tua visita prima del 10 Ottobre?
           </p>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Scrivi al 377 3364103
@@ -174,7 +169,6 @@ const inclusions = [
     width: 100%;
   }
 
-  /* Section Meta */
   .section-meta {
     display: flex;
     justify-content: space-between;
@@ -193,7 +187,6 @@ const inclusions = [
     font-weight: 700;
   }
 
-  /* Header */
   .header-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -228,7 +221,6 @@ const inclusions = [
     color: #ffffff;
   }
 
-  /* Layout Griglia */
   .pricing-grid {
     display: grid;
     grid-template-columns: 1.35fr 1fr;
@@ -236,7 +228,6 @@ const inclusions = [
     align-items: start;
   }
 
-  /* Card Quota Principale */
   .tier-card {
     background-color: #050505;
     border: 1px solid #1f1f1f;
@@ -257,21 +248,27 @@ const inclusions = [
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
     margin-bottom: 1rem;
   }
 
-  .tier-code {
-    font-family: 'Michroma', sans-serif;
-    font-size: 0.6875rem;
-    color: #737373;
-    letter-spacing: 0.1em;
+  .soldout-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: #a3a3a3;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.2rem;
   }
 
   .tier-saving-badge {
     background-color: #069892;
     color: #000000;
     font-family: 'Michroma', sans-serif;
-    font-size: 0.725rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 0.35rem 0.75rem;
@@ -292,19 +289,18 @@ const inclusions = [
     margin: 0;
   }
 
-  /* Promo Banner */
   .tier-promo-banner {
     background: linear-gradient(135deg, rgba(6, 152, 146, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
     border: 1px solid rgba(6, 152, 146, 0.3);
     border-radius: 0.35rem;
     padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   .promo-title {
     display: block;
     font-family: 'Michroma', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #ffffff;
     text-transform: uppercase;
     margin-bottom: 0.35rem;
@@ -317,39 +313,6 @@ const inclusions = [
     margin: 0;
   }
 
-  /* Garanzia 20 Giorni */
-  .guarantee-box {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    background-color: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    border-left: 2px solid #069892;
-    padding: 1rem 1.25rem;
-    border-radius: 0.25rem;
-    margin-bottom: 2rem;
-  }
-
-  .guarantee-icon {
-    font-size: 1.25rem;
-    line-height: 1;
-    margin-top: 0.1rem;
-  }
-
-  .guarantee-text strong {
-    display: block;
-    font-size: 0.875rem;
-    color: #ffffff;
-    margin-bottom: 0.2rem;
-  }
-
-  .guarantee-text span {
-    font-size: 0.8125rem;
-    color: #888888;
-    line-height: 1.45;
-  }
-
-  /* Inclusioni */
   .inclusions-list {
     display: flex;
     flex-direction: column;
@@ -406,7 +369,6 @@ const inclusions = [
     color: #555555;
   }
 
-  /* Colonna Laterale */
   .side-column {
     display: flex;
     flex-direction: column;
@@ -427,11 +389,6 @@ const inclusions = [
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 1rem;
-  }
-
-  .card-meta-num {
-    font-family: 'Michroma', sans-serif;
-    color: #004f5b;
   }
 
   .card-meta-tag {
@@ -491,7 +448,6 @@ const inclusions = [
     margin: 0 0 1.5rem 0;
   }
 
-  /* Bottoni */
   .btn {
     display: flex;
     align-items: center;
@@ -513,6 +469,7 @@ const inclusions = [
     background-color: #069892;
     color: #000000;
     border: 1px solid #069892;
+    font-weight: 700;
   }
 
   .btn-solid:hover {

@@ -6,7 +6,7 @@ interface Props {
 
 const {
   totalSpots = 30,
-  claimedSpots = 22,
+  claimedSpots = 6, // Puoi incrementarlo mano a mano che entrano i lead della seconda tranche
 } = Astro.props;
 
 const remainingSpots = totalSpots - claimedSpots;
@@ -17,13 +17,13 @@ const remainingSpots = totalSpots - claimedSpots;
     <div class="scarcity-left">
       <span class="pulse-beacon"></span>
       <span class="scarcity-text">
-        FASE PRE-LANCIO: <strong class="text-white">{claimedSpots}/{totalSpots} POSTI ASSEGNATI</strong> &bull; 
-        SOLO <span class="highlight">{remainingSpots} QUOTE FOUNDING</span> AL -50%
+        <span class="badge-soldout">1ª TRANCHE SOLD OUT</span> &bull; 
+        SBLOCCATE ULTIME <span class="highlight">30 TESSERE FOUNDATION</span> AL -35%
       </span>
     </div>
 
     <div class="scarcity-right">
-      <span class="warning-text">Dopo i {totalSpots} posti lo sconto termina</span>
+      <span class="warning-text">Valido fino al 9 Ottobre ore 23:59</span>
       <a href="#preiscrizione" class="scarcity-cta">Blocca Quota</a>
     </div>
   </div>
@@ -58,6 +58,7 @@ const remainingSpots = totalSpots - claimedSpots;
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
   .pulse-beacon {
@@ -69,14 +70,19 @@ const remainingSpots = totalSpots - claimedSpots;
     flex-shrink: 0;
   }
 
+  .badge-soldout {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
   .scarcity-text {
     letter-spacing: 0.04em;
     text-transform: uppercase;
-  }
-
-  .text-white {
-    color: #ffffff;
-    font-weight: 700;
   }
 
   .highlight {
@@ -88,10 +94,11 @@ const remainingSpots = totalSpots - claimedSpots;
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-shrink: 0;
   }
 
   .warning-text {
-    color: #737373;
+    color: #e5e5e5;
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -126,6 +133,10 @@ const remainingSpots = totalSpots - claimedSpots;
 
     .scarcity-text {
       font-size: 0.68rem;
+    }
+
+    .badge-soldout {
+      font-size: 0.62rem;
     }
 
     .scarcity-cta {
