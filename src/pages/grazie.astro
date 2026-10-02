@@ -2,63 +2,63 @@
 import Layout from '../layouts/Layout.astro';
 
 const whatsappNumber = "3773364103";
-const whatsappMessage = "Ciao! Ho appena inviato la richiesta sul sito per la promo Founding Member e vorrei concordare l'anamnesi iniziale.";
+const whatsappMessage = "Ciao! Ho appena inviato la richiesta per la promo Foundation Member (-35%) e vorrei confermare il mio orario per la sessione iniziale.";
 const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
 <Layout title="Richiesta Ricevuta | Ethos Training Club">
   <!-- Evento Lead dedicato per chi atterra sulla Thank You Page -->
- <script is:inline>
-  function fireLeadEvent() {
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'Lead', {
-        content_name: 'Pre-Iscrizione Founding Member',
-        status: 'completed'
-      });
-    } else {
-      setTimeout(fireLeadEvent, 200);
+  <script is:inline>
+    function fireLeadEvent() {
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+          content_name: 'Pre-Iscrizione Foundation Member 35%',
+          status: 'completed'
+        });
+      } else {
+        setTimeout(fireLeadEvent, 200);
+      }
     }
-  }
 
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    fireLeadEvent();
-  } else {
-    document.addEventListener('DOMContentLoaded', fireLeadEvent);
-  }
-</script>
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      fireLeadEvent();
+    } else {
+      document.addEventListener('DOMContentLoaded', fireLeadEvent);
+    }
+  </script>
 
   <main class="thank-you-wrapper">
     <div class="container">
       <div class="content-box">
-        <span class="badge">07 / ACCESSO CONFERMATO</span>
+        <span class="badge">07 / RICHIESTA CONFERMATA</span>
         
         <h1 class="title">
           Richiesta Registrata.<br />
-          <span class="text-accent">La tua tariffa è bloccata.</span>
+          <span class="text-accent">Il tuo posto è prioritario.</span>
         </h1>
 
         <p class="description">
-          Abbiamo ricevuto i tuoi dati e riservato la priorità per lo status di <strong>Founding Member (-50%)</strong>.
+          Abbiamo ricevuto i tuoi recapiti e riservato la disponibilità per la seconda tranche di <strong>Foundation Member (-35%)</strong> prima dell'apertura del <strong>10 Ottobre</strong>.
         </p>
 
         <div class="next-steps-card">
           <h3>Cosa succede adesso?</h3>
           <ul>
             <li>
-              <strong>1. Contatto telefonico</strong>
-              <span>La nostra reception ti contatterà a breve per verificare gli orari preferiti e rispondere a tutte le tue domande.</span>
+              <strong>1. Contatto Diretto</strong>
+              <span>Sunny o un trainer del nostro staff ti scriverà a breve su WhatsApp per concordare la fascia oraria preferita e rispondere a tutte le tue domande sul club.</span>
             </li>
             <li>
-              <strong>2. Nessun vincolo</strong>
-              <span>La quota resta congelata a tuo nome senza alcun pagamento anticipato online.</span>
+              <strong>2. Nessun Vincolo Anticipato</strong>
+              <span>La quota e la prelazione sull'orario restano bloccate a tuo nome senza alcun pagamento digitale anticipato.</span>
             </li>
           </ul>
         </div>
 
         <div class="action-card">
-          <p class="action-prompt">Non vuoi attendere la chiamata e preferisci bloccare l'orario adesso?</p>
+          <p class="action-prompt">Preferisci scegliere subito il tuo orario senza attendere?</p>
           <a href={whatsappDirectUrl} target="_blank" rel="noopener noreferrer" class="btn btn-solid">
-            Scrivi subito su WhatsApp
+            Scrivi subito al Team su WhatsApp
           </a>
           <a href="/" class="back-link">Torna alla Home</a>
         </div>
@@ -184,12 +184,12 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
     justify-content: center;
     padding: 1rem 2rem;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     text-decoration: none;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     width: 100%;
   }
@@ -203,6 +203,7 @@ const whatsappDirectUrl = `https://wa.me/39${whatsappNumber}?text=${encodeURICom
   .btn-solid:hover {
     background-color: #05807a;
     border-color: #05807a;
+    box-shadow: 0 0 15px rgba(6, 152, 146, 0.4);
   }
 
   .back-link {
